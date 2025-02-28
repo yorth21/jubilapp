@@ -13,6 +13,7 @@ import { ModulosComponent } from './components/features/modulos/modulos.componen
 import { PerfilComponent } from './components/features/perfil/perfil.component';
 import { NgModule } from '@angular/core';
 import { ModulosVocacionalComponent } from './components/features/modulos-vocacional/modulos-vocacional.component';
+import { TestVocationalComponent } from './components/features/test-vocational/test-vocational.component';
 
 export const routes: Routes = [
   {
@@ -51,6 +52,10 @@ export const routes: Routes = [
   {
     path: 'vocacional',
     component: ModulosVocacionalComponent,
+  },
+  {
+    path: 'test',
+    component: TestVocationalComponent,
   },
 ];
 
