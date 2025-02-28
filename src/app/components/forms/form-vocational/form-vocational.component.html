@@ -1,1 +1,35 @@
-<p>form-vocational works!</p>
+<div class="bg-gray-100 p-6 rounded-lg shadow-md">
+  <h2 class="text-center text-2xl font-bold mb-4">Cuestionario</h2>
+
+  <form [formGroup]="form" (ngSubmit)="enviarRespuestas()">
+    <div
+      *ngFor="let cuestion of cuestions"
+      class="mb-4 p-4 bg-white rounded-lg shadow"
+    >
+      <h3 class="text-lg font-semibold mb-2">{{ cuestion.texto }}</h3>
+      <div class="flex flex-col">
+        <label
+          *ngFor="let option of cuestion.options"
+          class="flex items-center cursor-pointer"
+        >
+          <input
+            type="radio"
+            [name]="'pregunta_' + cuestion.id"
+            [value]="option"
+            (change)="seleccionarRespuesta(cuestion.id, option)"
+            [checked]="form.controls[cuestion.id.toString()].value === option"
+            class="mr-2"
+          />
+          {{ option }}
+        </label>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-700"
+    >
+      Enviar Respuestas
+    </button>
+  </form>
+</div>
