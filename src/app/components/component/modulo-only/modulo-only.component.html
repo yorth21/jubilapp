@@ -1,10 +1,17 @@
-<div
-  class="bg-[var(--primary-color)] min-h-6 flex flex-col border border-b-0 border-black items-center"
->
-  <h1 class="text-[var(--text2-color)] font-serif font-bold text-xl">
-    {{ module.name }}
-  </h1>
-  <div>
-    <img [src]="module.img" alt="IMG" />
+<div class="fixed w-full top-0 left-0 shadow-md z-50">
+  <app-header></app-header>
+</div>
+<div class="bg-[var(--primary-color)] flex flex-col mt-28">
+  <div
+    *ngFor="let module of modules()"
+    class="p-4 bg-[var(--primary-color)] rounded-lg shadow-lg m-2 cursor-pointer hover:bg-[var(--second-color)] transition min-w-32 flex flex-col-reverse items-center"
+    (click)="goToModule(module.route)"
+  >
+    <img
+      [src]="module.img"
+      alt="Modulo"
+      class="w-full h-32 object-cover rounded-lg"
+    />
+    <h2 class="text-center font-bold mt-2">{{ module.name }}</h2>
   </div>
 </div>
