@@ -4,6 +4,7 @@ import { IconJubilComponent } from '../../component/icon-jubil/icon-jubil.compon
 import { ButtonIniciarComponent } from '../../component/button-iniciar/button-iniciar.component';
 import { FormLoginComponent } from '../../forms/form-login/form-login.component';
 import { FooterComponent } from '../../../modules/shared/components/footer/footer.component';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -18,4 +19,10 @@ import { FooterComponent } from '../../../modules/shared/components/footer/foote
   templateUrl: './iniciar-sesion.component.html',
   styleUrl: './iniciar-sesion.component.css',
 })
-export class IniciarSesionComponent {}
+export class IniciarSesionComponent {
+  constructor(private router: Router) {}
+
+  goToAbout() {
+    this.router.navigate(['/modules']);
+  }
+}

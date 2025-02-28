@@ -4,6 +4,7 @@ import { IconJubilComponent } from '../../component/icon-jubil/icon-jubil.compon
 import { ButtonIniciarComponent } from '../../component/button-iniciar/button-iniciar.component';
 import { ButtonRegistreComponent } from '../../component/button-registre/button-registre.component';
 import { FooterComponent } from '../../../modules/shared/components/footer/footer.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-welcome',

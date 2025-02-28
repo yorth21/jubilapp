@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/features/home/home.component';
 import { ModuloOnlyComponent } from './components/component/modulo-only/modulo-only.component';
 import { ButtonExitComponent } from './components/component/button-exit/button-exit.component';
@@ -11,6 +11,7 @@ import { RegisterComponent } from './components/features/register/register.compo
 import { HeaderComponent } from './modules/shared/components/header/header.component';
 import { ModulosComponent } from './components/features/modulos/modulos.component';
 import { PerfilComponent } from './components/features/perfil/perfil.component';
+import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
   {
@@ -47,3 +48,9 @@ export const routes: Routes = [
     component: PerfilComponent,
   },
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
