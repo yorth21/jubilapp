@@ -12,6 +12,7 @@ import { HeaderComponent } from './modules/shared/components/header/header.compo
 import { ModulosComponent } from './components/features/modulos/modulos.component';
 import { PerfilComponent } from './components/features/perfil/perfil.component';
 import { NgModule } from '@angular/core';
+import { ModulosVocacionalComponent } from './components/features/modulos-vocacional/modulos-vocacional.component';
 
 export const routes: Routes = [
   {
@@ -46,6 +47,10 @@ export const routes: Routes = [
   {
     path: 'perfil',
     component: PerfilComponent,
+  },
+  {
+    path: 'vocacional',
+    component: ModulosVocacionalComponent,
   },
 ];
 

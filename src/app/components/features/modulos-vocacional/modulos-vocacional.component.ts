@@ -5,32 +5,27 @@ import { Module } from '../../../modules/shared/models/module';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-modulos',
+  selector: 'app-modulos-vocacional',
   standalone: true,
   imports: [HeaderComponent, ModuloOnlyComponent, CommonModule],
-  templateUrl: './modulos.component.html',
-  styleUrl: './modulos.component.css',
+  templateUrl: './modulos-vocacional.component.html',
+  styleUrl: './modulos-vocacional.component.css',
 })
-export class ModulosComponent {
+export class ModulosVocacionalComponent {
   constructor() {
     const initModules: Module[] = [
       {
-        name: 'MODULO DE ORIENTACION VOCACIONAL',
+        name: 'PRUEBA VOCACIONAL',
         img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
         route: '',
       },
       {
-        name: 'MODULO DE INTERACCION SOCIAL',
+        name: 'RECURSOS DE EXPLORACION LABORAL',
         img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
         route: '',
       },
       {
-        name: 'MODULO DE EVALUACION PERSONALIZADAS',
-        img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
-        route: '',
-      },
-      {
-        name: 'MODULO PSICOLOGICA',
+        name: 'GUIAS DE ACTIVIDADES RECOMENDADAS',
         img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
         route: '',
       },
