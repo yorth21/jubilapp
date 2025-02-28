@@ -22,7 +22,7 @@ import { Route, Router } from '@angular/router';
 export class IniciarSesionComponent {
   constructor(private router: Router) {}
 
-  goToAbout() {
+  goToModules() {
     this.router.navigate(['/modules']);
   }
 }
