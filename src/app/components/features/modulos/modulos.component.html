@@ -1,0 +1,11 @@
+<div>
+  <div class="fixed w-full top-0 left-0 shadow-md z-50">
+    <app-header></app-header>
+  </div>
+  <div class="bg-slate-800 flex flex-col mt-28">
+    <app-modulo-only
+      *ngFor="let Module of modules()"
+      [module]="Module"
+    ></app-modulo-only>
+  </div>
+</div>
