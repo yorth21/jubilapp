@@ -7,12 +7,5 @@
   --primary-color: #ffffff;
   --second-color: #d9d9d9;
   --text-color: #334a58;
-  --text2-color: #899298;
-}
-.bg-custo {
-  background-image: url("assets/img/background.svg"); /* Ruta del SVG */
-  background-size: cover; /* Ajusta el tamaño */
-  background-position: center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita que se repita */
-  min-height: 100vh; /* Ajusta la altura */
+  --text2-color: #7f868b;
 }
