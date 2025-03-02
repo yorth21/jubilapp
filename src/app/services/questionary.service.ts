@@ -15,14 +15,22 @@ export class QuestionaryService {
   private cuestions: Cuestion[] = [
     {
       id: 1,
-      texto: '¿Cuál es tu color favorito?',
-      options: ['Rojo', 'Azul', 'Verde', 'Amarillo'],
+      texto: '¿¿Qué tipo de actividades disfrutas más?',
+      options: [
+        'Dibujar, pintar o hacer manualidades.',
+        'Ayudar a las personas en sus problemas',
+        'Armar o reparar cosas.',
+      ],
       selected: null,
     },
     {
       id: 2,
-      texto: '¿Cuál es tu animal favorito?',
-      options: ['Perro', 'Gato', 'Elefante', 'Águila'],
+      texto: '¿Si tuvieras que elegir un trabajo, ¿cuál preferirías?',
+      options: [
+        'Ser gerente de una empresa.',
+        'Trabajar en un laboratorio investigando.',
+        'Organizar documentos y llevar registros.',
+      ],
       selected: null,
     },
     {

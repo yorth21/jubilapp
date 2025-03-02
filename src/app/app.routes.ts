@@ -9,6 +9,7 @@ import { PerfilComponent } from './components/features/perfil/perfil.component';
 import { NgModule } from '@angular/core';
 import { ModulosVocacionalComponent } from './components/features/modulos-vocacional/modulos-vocacional.component';
 import { TestVocationalComponent } from './components/features/test-vocational/test-vocational.component';
+import { ExploracionComponent } from './components/features/exploracion/exploracion.component';
 
 export const routes: Routes = [
   {
@@ -51,6 +52,10 @@ export const routes: Routes = [
   {
     path: 'test',
     component: TestVocationalComponent,
+  },
+  {
+    path: 'exploracion',
+    component: ExploracionComponent,
   },
 ];
 

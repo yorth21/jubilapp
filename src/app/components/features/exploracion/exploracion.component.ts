@@ -1,34 +1,34 @@
 import { Component, signal } from '@angular/core';
 import { HeaderComponent } from '../../../modules/shared/components/header/header.component';
-import { Module } from '../../../modules/shared/models/module';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Module } from '../../../modules/shared/models/module';
 
 @Component({
-  selector: 'app-modulos-vocacional',
+  selector: 'app-exploracion',
   standalone: true,
   imports: [HeaderComponent, CommonModule],
-  templateUrl: './modulos-vocacional.component.html',
-  styleUrl: './modulos-vocacional.component.css',
+  templateUrl: './exploracion.component.html',
+  styleUrl: './exploracion.component.css',
 })
-export class ModulosVocacionalComponent {
+export class ExploracionComponent {
   constructor(private router: Router) {}
 
-  modules = signal<Module[]>([
+  activites = signal<Module[]>([
     {
-      name: 'PRUEBA VOCACIONAL',
+      name: 'ACTIVIDADES DE PASTO EN SEMANA',
       img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
-      route: '/test',
+      route: ' ',
     },
     {
-      name: 'RECURSOS DE EXPLORACION LABORAL',
+      name: 'CURSOS DISPONIBLES',
       img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
-      route: '/exploracion',
+      route: ' ',
     },
     {
-      name: 'GUIAS DE ACTIVIDADES RECOMENDADAS',
+      name: 'OPORTUNIDADES DE VOLUNTARIADO',
       img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
-      route: '/interaccion-social',
+      route: ' ',
     },
   ]);
 
