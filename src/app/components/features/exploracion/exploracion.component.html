@@ -1,5 +1,5 @@
 <div class="fixed w-full top-0 left-0 shadow-md z-50">
-  <app-header [titulo]="'RECURSOS DE EXPLORACION'"></app-header>
+  <app-header [titulo]="'RECURSOS DE EXPLORACION LABORAL'"></app-header>
 </div>
 <div class="bg-[var(--primary-color)] flex flex-col mt-28">
   <div
@@ -7,7 +7,7 @@
     class="p-4 bg-[var(--primary-color)] rounded-lg m-2 transition min-w-32 flex flex-col items-center"
   >
     <h2
-      class="text-center font-bold mt-2 font-serif text-[var(--second-color)] text-3xl"
+      class="text-center font-bold mt-2 font-serif text-[var(--text2-color)] text-3xl"
     >
       {{ activity.name }}
     </h2>
@@ -17,7 +17,11 @@
       class="w-full h-32 object-cover rounded-3xl"
     />
     <ul>
-      <a class="hover:underline" href="{{ activity.link }}">VER MAS</a>
+      <a
+        class="hover:underline font-serif text-xl hover:text-[var(--text-color)]"
+        href="{{ activity.link }}"
+        >VER MAS</a
+      >
     </ul>
   </div>
 </div>

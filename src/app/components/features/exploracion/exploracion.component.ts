@@ -17,7 +17,7 @@ export class ExploracionComponent {
 
   activites = signal<Activity[]>([
     {
-      name: 'ACTIVIDADES DE PASTO EN SEMANA',
+      name: 'ACTIVIDADES DE PASTO EN SEMANA ',
       img: 'https://comfamiliarhuila.com/media/2025/01/programa-adulto-mayor-2.jpg',
       link: 'https://comfamiliarhuila.com/recreacion/programa-adulto-mayor/',
     },

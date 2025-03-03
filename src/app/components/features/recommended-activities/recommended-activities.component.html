@@ -1,13 +1,20 @@
 <div class="fixed w-full top-0 left-0 shadow-md z-50">
   <app-header [titulo]="'GUIAS DE ACTIVIDADES RECOMENDADAS'"></app-header>
 </div>
-<div class="bg-[var(--primary-color)] flex flex-col mt-28">
+<div>
+  <h2
+    class="mt-32 text-2xl font-serif text-[var(--text-color)] text-center font-semibold"
+  >
+    SEGUN LA PRUEBA VOCACIONAL SE LE RECOMIENDA
+  </h2>
+</div>
+<div class="bg-[var(--primary-color)] flex flex-col mt-18">
   <div
     *ngFor="let activity of activites()"
     class="p-4 bg-[var(--primary-color)] rounded-lg m-2 transition min-w-32 flex flex-col items-center"
   >
     <h2
-      class="text-center font-bold mt-2 font-serif text-[var(--second-color)] text-3xl"
+      class="text-center font-bold mt-2 font-serif text-[var(--text2-color)] text-3xl"
     >
       {{ activity.name }}
     </h2>

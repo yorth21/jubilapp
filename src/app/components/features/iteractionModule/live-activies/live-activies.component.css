@@ -2,6 +2,6 @@ img {
   flex-direction: column;
   display: flex;
   justify-content: center;
-  height: 400px;
-  width: 500px;
+  height: 500px;
+  width: 700px;
 }
