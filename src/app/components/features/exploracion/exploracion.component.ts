@@ -3,6 +3,7 @@ import { HeaderComponent } from '../../../modules/shared/components/header/heade
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Module } from '../../../modules/shared/models/module';
+import { Activity } from '../../../modules/shared/models/activity';
 
 @Component({
   selector: 'app-exploracion',
@@ -14,21 +15,21 @@ import { Module } from '../../../modules/shared/models/module';
 export class ExploracionComponent {
   constructor(private router: Router) {}
 
-  activites = signal<Module[]>([
+  activites = signal<Activity[]>([
     {
       name: 'ACTIVIDADES DE PASTO EN SEMANA',
-      img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
-      route: ' ',
+      img: 'https://comfamiliarhuila.com/media/2025/01/programa-adulto-mayor-2.jpg',
+      link: 'https://comfamiliarhuila.com/recreacion/programa-adulto-mayor/',
     },
     {
       name: 'CURSOS DISPONIBLES',
-      img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
-      route: ' ',
+      img: 'https://www.comfamiliar.com/wp-content/uploads/2023/09/IMG_7661-1024x684.jpg',
+      link: 'https://www.comfamiliar.com/conoce-las-ultimas-novedades-de-nuestro-programa-de-gerontologia/',
     },
     {
       name: 'OPORTUNIDADES DE VOLUNTARIADO',
-      img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
-      route: ' ',
+      img: 'https://scontent.fclo1-3.fna.fbcdn.net/v/t1.6435-9/119096039_3281889578527498_5153445949562518240_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGOnApeOkqjTPhL6HiczJNjuvxYNH09Ljm6_Fg0fT0uOYkPwPrTHS7QBDwh3DSsxoqHWoJ40cBzIKIaMDRnjurd&_nc_ohc=LueWPK5GwWcQ7kNvgEHAuXV&_nc_oc=AdhEcBmi2lYAjgWZQfVwkv5JMmRJMufo9rYIo5uIOdsOx-VuXzI8Sksx3691VTU87sQGpgdLQSiDvSSP_Y76qX5l&_nc_zt=23&_nc_ht=scontent.fclo1-3.fna&_nc_gid=AqqqgbB0JTAiF4sdpf1NTCp&oh=00_AYB5Px9S5xJ5XpBWojep3anp_XUQ-BAjG86pJy_HX8oX1g&oe=67ED16A7',
+      link: ' ',
     },
   ]);
 
