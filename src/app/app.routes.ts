@@ -81,7 +81,7 @@ export const routes: Routes = [
     component: LiveActiviesComponent,
   },
   {
-    path: 'reunion',
+    path: 'psicologo',
     component: PsicologyComponent,
   },
 ];

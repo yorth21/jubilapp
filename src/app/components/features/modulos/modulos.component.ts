@@ -33,8 +33,8 @@ export class ModulosComponent {
     },
     {
       name: 'MODULO PSICOLOGIA',
-      img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
-      route: '/interaccion-social',
+      img: 'https://images.pexels.com/photos/7195310/pexels-photo-7195310.jpeg?auto=compress&cs=tinysrgb&w=600',
+      route: '/psicologo',
     },
   ]);
 
