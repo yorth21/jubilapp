@@ -1,0 +1,45 @@
+<div>
+  <app-header [titulo]="'FOROS Y TEMAS DE SU INTERÉS'"></app-header>
+
+  <div class="flex justify-center space-x-4 mt-4">
+    <button
+      (click)="seleccionarForo('BAILOTERAPIA')"
+      class="px-4 py-2 bg-[var(--background-color)] text-[var(--primary-color)] rounded-lg shadow"
+    >
+      Ver Foro Bailoterapia
+    </button>
+
+    <button
+      (click)="seleccionarForo('CAMINATAS')"
+      class="px-4 py-2 bg-[var(--second-color)] text-[var(--text-color)] rounded-lg shadow"
+    >
+      Ver Foro Caminatas
+    </button>
+  </div>
+
+  <div
+    *ngIf="selectedForo === 'BAILOTERAPIA'"
+    class="transition-all duration-500 animate-slide-in"
+  >
+    <app-chat-box
+      class="ms-2"
+      [tituloChat]="'FORO BAILOTERAPIA'"
+      [mensajes]="mensajesPorForo['BAILOTERAPIA']"
+      (mensajeEnviado)="guardarMensaje('BAILOTERAPIA', $event)"
+    >
+    </app-chat-box>
+  </div>
+
+  <div
+    *ngIf="selectedForo === 'CAMINATAS'"
+    class="transition-all duration-500 animate-slide-in"
+  >
+    <app-chat-box
+      class="ms-2"
+      [tituloChat]="'FORO CAMINATAS'"
+      [mensajes]="mensajesPorForo['CAMINATAS']"
+      (mensajeEnviado)="guardarMensaje('CAMINATAS', $event)"
+    >
+    </app-chat-box>
+  </div>
+</div>
