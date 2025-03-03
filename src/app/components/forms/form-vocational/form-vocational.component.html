@@ -1,7 +1,7 @@
 <div class="bg-[var(--primary-color)] p-6 rounded-lg shadow-md">
   <h2 class="text-center text-2xl font-bold mb-4">Cuestionario</h2>
 
-  <form [formGroup]="form" (ngSubmit)="enviarRespuestas()">
+  <form [formGroup]="form" (ngSubmit)="sendAnswers()">
     <div
       *ngFor="let cuestion of cuestions"
       class="mb-4 p-4 bg-[var(--primary-color)] rounded-lg shadow"
@@ -16,7 +16,7 @@
             type="radio"
             [name]="'pregunta_' + cuestion.id"
             [value]="option"
-            (change)="seleccionarRespuesta(cuestion.id, option)"
+            (change)="selectAnswer(cuestion.id, option)"
             [checked]="form.controls[cuestion.id.toString()].value === option"
             class="mr-2"
           />

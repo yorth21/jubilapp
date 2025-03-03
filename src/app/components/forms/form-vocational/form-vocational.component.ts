@@ -31,11 +31,11 @@ export class FormVocationalComponent implements OnInit {
       });
     });
   }
-  enviarRespuestas() {
+  sendAnswers() {
     console.log(this.form.value);
   }
 
-  seleccionarRespuesta(cuestionId: number, selected: string) {
+  selectAnswer(cuestionId: number, selected: string) {
     this.questionaryService.actualizarSeleccion(cuestionId, selected);
     this.form.controls[cuestionId.toString()].setValue(selected);
   }

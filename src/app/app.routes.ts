@@ -15,6 +15,8 @@ import { ChatBoxComponent } from './components/component/chat-box/chat-box.compo
 import { ForumsComponent } from './components/features/iteractionModule/forums/forums.component';
 import { ModuleIteractionsComponent } from './components/features/iteractionModule/module-iteractions/module-iteractions.component';
 import { LiveActiviesComponent } from './components/features/iteractionModule/live-activies/live-activies.component';
+import { MeetingInfoComponent } from './components/component/meeting-info/meeting-info.component';
+import { PsicologyComponent } from './components/features/psicology/psicology.component';
 
 export const routes: Routes = [
   {
@@ -77,6 +79,10 @@ export const routes: Routes = [
   {
     path: 'actividades',
     component: LiveActiviesComponent,
+  },
+  {
+    path: 'reunion',
+    component: PsicologyComponent,
   },
 ];
 

@@ -1,0 +1,63 @@
+<div
+  class="max-w-lg mx-auto bg-white p-6 shadow-md rounded-lg border border-gray-200"
+>
+  <h2 class="text-xl font-bold text-gray-800 text-center mb-4">Agendar Cita</h2>
+
+  <form
+    [formGroup]="meetForm"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col gap-4"
+  >
+    <div>
+      <label class="block font-semibold text-gray-700"
+        >Descripción del problema</label
+      >
+      <textarea
+        formControlName="description"
+        class="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
+        rows="3"
+        placeholder="Describe tu problema aquí..."
+      ></textarea>
+    </div>
+
+    <div>
+      <label class="block font-semibold text-gray-700">Fecha</label>
+      <input
+        type="date"
+        formControlName="date"
+        class="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
+      />
+    </div>
+
+    <div>
+      <label class="block font-semibold text-gray-700"
+        >Selecciona un Médico</label
+      >
+      <select
+        formControlName="doctor"
+        class="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
+      >
+        <option value="" disabled selected>Seleccione un médico</option>
+        <option *ngFor="let doc of doctors" [value]="doc.id">
+          {{ doc.name }}
+        </option>
+      </select>
+    </div>
+
+    <div>
+      <label class="block font-semibold text-gray-700">Hora</label>
+      <input
+        type="time"
+        formControlName="time"
+        class="w-full p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-blue-500 text-white font-semibold p-2 rounded-lg hover:bg-blue-700 transition"
+    >
+      Agendar Cita
+    </button>
+  </form>
+</div>

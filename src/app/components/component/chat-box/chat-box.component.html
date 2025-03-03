@@ -1,9 +1,9 @@
-<div class="max-w-3xl mx-auto p-4 bg-white shadow-lg rounded-lg">
+<div class="max-w-3xl mx-auto p-4 shadow-lg rounded-lg">
   <h2 class="text-lg font-bold text-[var(--text-color)] font-serif">
     {{ tituloChat }}
   </h2>
 
-  <div class="border p-2 h-64 overflow-y-auto mt-2">
+  <div class="border p-2 h-96 overflow-y-auto mt-2">
     <div *ngFor="let msg of mensajes" class="p-2 my-1 bg-gray-200 rounded">
       {{ msg }}
     </div>

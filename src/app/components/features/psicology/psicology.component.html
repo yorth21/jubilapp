@@ -19,27 +19,15 @@
 
   <div
     *ngIf="selectedForo === 'BAILOTERAPIA'"
-    class="transition-all duration-500 animate-slide-in bg-red-600 h-100%"
+    class="transition-all duration-500 animate-slide-in mt-6"
   >
-    <app-chat-box
-      class="ms-2"
-      [tituloChat]="'FORO BAILOTERAPIA'"
-      [mensajes]="mensajesPorForo['BAILOTERAPIA']"
-      (mensajeEnviado)="guardarMensaje('BAILOTERAPIA', $event)"
-    >
-    </app-chat-box>
+    <app-form-meet></app-form-meet>
   </div>
 
   <div
     *ngIf="selectedForo === 'CAMINATAS'"
-    class="transition-all duration-500 animate-slide-in"
+    class="transition-all duration-500 animate-slide-in text-center mt-6 mx-auto w-full"
   >
-    <app-chat-box
-      class="ms-2"
-      [tituloChat]="'FORO CAMINATAS'"
-      [mensajes]="mensajesPorForo['CAMINATAS']"
-      (mensajeEnviado)="guardarMensaje('CAMINATAS', $event)"
-    >
-    </app-chat-box>
+    <app-meeting-info></app-meeting-info>
   </div>
 </div>
