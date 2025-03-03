@@ -20,9 +20,33 @@ import { Route, Router } from '@angular/router';
   styleUrl: './iniciar-sesion.component.css',
 })
 export class IniciarSesionComponent {
-  constructor(private router: Router) {}
+  cedula: string = '';
+  password: string = '';
+  //daticos de prueba
+  usuariosValidos = [
+    { cedula: '12345', password: '123' },
+    { cedula: '87654321', password: 'segura456' },
+  ];
+
+  recibirDatosFormulario(datos: { cedula: string; password: string }) {
+    this.cedula = datos.cedula;
+    this.password = datos.password;
+  }
 
   goToModules() {
-    this.router.navigate(['/modules']);
+    if (!this.cedula || !this.password) {
+      alert('Por favor ingrese cédula y contraseña.');
+      return;
+    }
+    const usuarioEncontrado = this.usuariosValidos.find(
+      (user) => user.cedula === this.cedula && user.password === this.password
+    );
+
+    if (!usuarioEncontrado) {
+      alert('Cédula o contraseña incorrecta.');
+      return;
+    }
+
+    console.log('Autenticado con éxito');
   }
 }

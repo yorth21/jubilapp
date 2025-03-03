@@ -17,18 +17,18 @@ export class ModulosVocacionalComponent {
   modules = signal<Module[]>([
     {
       name: 'PRUEBA VOCACIONAL',
-      img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
+      img: 'https://images.pexels.com/photos/5428830/pexels-photo-5428830.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       route: '/test',
     },
     {
       name: 'RECURSOS DE EXPLORACION LABORAL',
-      img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
+      img: 'https://images.pexels.com/photos/434163/pexels-photo-434163.jpeg?auto=compress&cs=tinysrgb&w=600',
       route: '/exploracion',
     },
     {
       name: 'GUIAS DE ACTIVIDADES RECOMENDADAS',
-      img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
-      route: '/interaccion-social',
+      img: 'https://images.pexels.com/photos/30960046/pexels-photo-30960046/free-photo-of-anciano-leyendo-el-periodico-cerca-de-la-pagoda-de-tokio.jpeg?auto=compress&cs=tinysrgb&w=600',
+      route: '/recomendacion',
     },
   ]);
 

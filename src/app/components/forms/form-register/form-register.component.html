@@ -1,58 +1,62 @@
-<div class="flex items-start min-h-screen max-h-screen p-10 m-0">
-  <form class="rounded-lg w-96 text-center max-h-20">
-    <div class="grid grid-cols-2 gap-1 h-64">
-      <label class="block text-center">
-        <span class="text-[var(--text-color)] font-semibold">NOMBRE</span>
-        <input
-          type="text"
-          class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
-        />
-      </label>
-
-      <label class="block text-center">
-        <span class="text-[var(--text-color)] font-semibold">CÉDULA</span>
-        <input
-          type="text"
-          class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
-        />
-      </label>
-
-      <label class="block text-center">
-        <span class="text-[var(--text-color)] font-semibold">CONTRASEÑA</span>
-        <input
-          type="password"
-          class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
-        />
-      </label>
-
-      <label class="block text-center">
-        <span class="text-[var(--text-color)] font-semibold">DIRECCIÓN</span>
-        <input
-          type="text"
-          class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
-        />
-      </label>
-
-      <label class="block text-center">
-        <span class="text-[var(--text-color)] font-semibold">EDAD</span>
-        <input
-          type="number"
-          class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
-        />
-      </label>
-    </div>
-
-    <div class="flex justify-center flex-col items-center">
-      <div class="flex flex-col items-center justify-center">
-        <span class="text-[var(--text-color)] font-semibold"
-          >EVALUACIÓN PSICOLÓGICA</span
-        >
-      </div>
-      <button
-        class="w-1/2 bg-[var(--primary-color)] text-[var(--text-color)] font-semibold p-2 rounded-lg hover:bg-[var(--second-color)] transition"
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="grid grid-cols-2 gap-2 h-64">
+    <label class="block text-center">
+      <span class="text-[var(--text-color)] font-semibold font-serif"
+        >NOMBRE</span
       >
-        Iniciar
-      </button>
-    </div>
-  </form>
-</div>
+      <input
+        type="text"
+        formControlName="nombre"
+        class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
+      />
+    </label>
+
+    <label class="block text-center">
+      <span class="text-[var(--text-color)] font-semibold font-serif"
+        >CÉDULA</span
+      >
+      <input
+        type="text"
+        formControlName="cedula"
+        class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
+      />
+    </label>
+
+    <label class="block text-center">
+      <span class="text-[var(--text-color)] font-semibold font-serif"
+        >CONTRASEÑA</span
+      >
+      <input
+        type="password"
+        formControlName="contraseña"
+        class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
+      />
+    </label>
+
+    <label class="block text-center">
+      <span class="text-[var(--text-color)] font-semibold font-serif"
+        >DIRECCIÓN</span
+      >
+      <input
+        type="text"
+        formControlName="direccion"
+        class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
+      />
+    </label>
+
+    <label class="block text-center">
+      <span class="text-[var(--text-color)] font-semibold font-serif"
+        >EDAD</span
+      >
+      <input
+        type="number"
+        formControlName="edad"
+        class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
+      />
+    </label>
+  </div>
+
+  <div class="flex flex-col items-center mt-4">
+    <app-button-registre></app-button-registre>
+  </div>
+</form>

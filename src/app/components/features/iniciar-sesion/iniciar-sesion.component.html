@@ -11,7 +11,9 @@
       <app-icon-jubil></app-icon-jubil>
     </div>
     <div class="p-8">
-      <app-form-login></app-form-login>
+      <app-form-login
+        (datosIngresados)="recibirDatosFormulario($event)"
+      ></app-form-login>
     </div>
     <div (click)="goToModules()"><app-button-iniciar></app-button-iniciar></div>
     <div class="">

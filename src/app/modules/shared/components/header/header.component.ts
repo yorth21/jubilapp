@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
 import { IconJubilComponent } from '../../../../components/component/icon-jubil/icon-jubil.component';
 import { ButtonExitComponent } from '../../../../components/component/button-exit/button-exit.component';
 import { MiPerfilComponent } from '../../../../components/component/mi-perfil/mi-perfil.component';
@@ -18,7 +17,8 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-  titulo = 'SELECCIONE UN APARTADO';
+  @Input() titulo: String = 'SELECCIONE UN APARTADO';
+
   constructor(private router: Router) {}
 
   goToPerfil() {

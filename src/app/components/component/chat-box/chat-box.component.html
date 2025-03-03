@@ -1,0 +1,26 @@
+<div class="max-w-3xl mx-auto p-4 bg-white shadow-lg rounded-lg">
+  <h2 class="text-lg font-bold text-[var(--text-color)] font-serif">
+    {{ tituloChat }}
+  </h2>
+
+  <div class="border p-2 h-64 overflow-y-auto mt-2">
+    <div *ngFor="let msg of mensajes" class="p-2 my-1 bg-gray-200 rounded">
+      {{ msg }}
+    </div>
+  </div>
+
+  <div class="mt-2 flex">
+    <input
+      type="text"
+      [(ngModel)]="newmessage"
+      class="flex-1 p-2 border rounded"
+      placeholder="Escribe tu mensaje..."
+    />
+    <button
+      (click)="enviarMensaje()"
+      class="ml-2 px-4 py-2 bg-[var(--background-color)] font-serif text-[var(--primary-color)] rounded"
+    >
+      Enviar
+    </button>
+  </div>
+</div>

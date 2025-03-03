@@ -10,6 +10,11 @@ import { NgModule } from '@angular/core';
 import { ModulosVocacionalComponent } from './components/features/modulos-vocacional/modulos-vocacional.component';
 import { TestVocationalComponent } from './components/features/test-vocational/test-vocational.component';
 import { ExploracionComponent } from './components/features/exploracion/exploracion.component';
+import { RecommendedActivitiesComponent } from './components/features/recommended-activities/recommended-activities.component';
+import { ChatBoxComponent } from './components/component/chat-box/chat-box.component';
+import { ForumsComponent } from './components/features/iteractionModule/forums/forums.component';
+import { ModuleIteractionsComponent } from './components/features/iteractionModule/module-iteractions/module-iteractions.component';
+import { LiveActiviesComponent } from './components/features/iteractionModule/live-activies/live-activies.component';
 
 export const routes: Routes = [
   {
@@ -56,6 +61,22 @@ export const routes: Routes = [
   {
     path: 'exploracion',
     component: ExploracionComponent,
+  },
+  {
+    path: 'recomendacion',
+    component: RecommendedActivitiesComponent,
+  },
+  {
+    path: 'foros',
+    component: ForumsComponent,
+  },
+  {
+    path: 'social',
+    component: ModuleIteractionsComponent,
+  },
+  {
+    path: 'actividades',
+    component: LiveActiviesComponent,
   },
 ];
 
