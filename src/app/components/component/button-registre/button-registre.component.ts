@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class ButtonRegistreComponent {
   constructor(private router: Router) {}
 
-  goToLogin() {
+  goToRegister() {
     this.router.navigate(['/register']);
   }
 }

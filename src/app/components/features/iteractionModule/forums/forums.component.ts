@@ -11,17 +11,19 @@ import { CommonModule } from '@angular/common';
   styleUrl: './forums.component.css',
 })
 export class ForumsComponent {
+  isInverted = false;
   selectedForo: string | null = null;
   mensajesPorForo: { [key: string]: string[] } = {
     BAILOTERAPIA: [],
     CAMINATAS: [],
   };
 
-  seleccionarForo(foro: string) {
+  selectForo(foro: string) {
     this.selectedForo = foro;
+    this.isInverted = !this.isInverted;
   }
 
-  guardarMensaje(foro: string, mensaje: string) {
+  saveMessage(foro: string, mensaje: string) {
     if (foro && mensaje.trim()) {
       this.mensajesPorForo[foro].push(mensaje);
     }
