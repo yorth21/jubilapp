@@ -7,14 +7,22 @@
   <div class="flex justify-center space-x-4 mt-4">
     <button
       (click)="seleccionarForo('BAILOTERAPIA')"
-      class="px-4 py-2 bg-[var(--background-color)] text-[var(--primary-color)] rounded-lg shadow"
+      class="px-4 py-2 bg-[var(--background-color)] text-[var(--primary-color)] rounded-lg shadow transition-colors duration-300"
+      [ngClass]="{
+        'bg-[var(--background-color)] text-[var(--primary-color)]': !isInverted,
+        'bg-[var(--primary-color)] text-[var(--background-color)]': isInverted
+      }"
     >
       Obtener Cita
     </button>
 
     <button
       (click)="seleccionarForo('CAMINATAS')"
-      class="px-4 py-2 bg-[var(--second-color)] text-[var(--text-color)] rounded-lg shadow"
+      class="px-4 py-2 bg-[var(--second-color)] text-[var(--text-color)] rounded-lg shadow transition-colors duration-300"
+      [ngClass]="{
+        'bg-[var(--second-color)] text-[var(--text-color)]': !isInverted,
+        'bg-[var(--text-color)] text-[var(--second-color)]': isInverted
+      }"
     >
       Mis Citas
     </button>

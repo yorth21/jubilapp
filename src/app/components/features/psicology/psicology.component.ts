@@ -18,6 +18,7 @@ import { MeetingInfoComponent } from '../../component/meeting-info/meeting-info.
   styleUrl: './psicology.component.css',
 })
 export class PsicologyComponent {
+  isInverted = false;
   selectedForo: string | null = null;
   mensajesPorForo: { [key: string]: string[] } = {
     BAILOTERAPIA: [],
@@ -26,6 +27,7 @@ export class PsicologyComponent {
 
   seleccionarForo(foro: string) {
     this.selectedForo = foro;
+    this.isInverted = !this.isInverted;
   }
 
   guardarMensaje(foro: string, mensaje: string) {
