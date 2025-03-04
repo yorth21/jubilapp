@@ -1,7 +1,11 @@
 <div
   class="w-3/5 mx-auto bg-[var(--primary-color)] p-6 shadow-md rounded-lg border border-gray-200"
 >
-  <h2 class="text-xl font-bold text-gray-800 text-center mb-4">Agendar Cita</h2>
+  <h2
+    class="text-2xl font-bold text-[var(--text-color)] text-center mb-4 font-serif"
+  >
+    Agendar Cita
+  </h2>
 
   <form
     [formGroup]="meetForm"
@@ -9,7 +13,7 @@
     class="flex flex-col gap-4"
   >
     <div>
-      <label class="block font-semibold text-gray-700"
+      <label class="block font-semibold text-[var(--text-color)] text-lg"
         >Descripción del problema</label
       >
       <textarea
@@ -21,7 +25,9 @@
     </div>
 
     <div>
-      <label class="block font-semibold text-gray-700">Fecha</label>
+      <label class="block font-semibold text-[var(--text-color)] text-lg"
+        >Fecha</label
+      >
       <input
         type="date"
         formControlName="date"
@@ -30,7 +36,8 @@
     </div>
 
     <div>
-      <label class="block font-semibold text-gray-700"
+      <label
+        class="block font-semibold font-serif text-[var(--text-color)] text-lg"
         >Selecciona un Médico</label
       >
       <select
@@ -45,7 +52,9 @@
     </div>
 
     <div>
-      <label class="block font-semibold text-gray-700">Hora</label>
+      <label class="block font-semibold text-[var(--text-color)] text-lg"
+        >Hora</label
+      >
       <input
         type="time"
         formControlName="time"
@@ -55,7 +64,7 @@
 
     <button
       type="submit"
-      class="w-full bg-blue-500 text-white font-semibold p-2 rounded-lg hover:bg-blue-700 transition"
+      class="w-full bg-[var(--background-color)] text-[var(--primary-color)] font-semibold p-2 rounded-lg hover:bg-[var(--second-color)] transition font-serif hover:text-[var(--text-color)]"
     >
       Agendar Cita
     </button>

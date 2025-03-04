@@ -29,7 +29,7 @@ export class ModulosComponent {
     {
       name: 'MODULO DE EVALUACIONES PERSONALIZADAS',
       img: 'https://images.pexels.com/photos/8654753/pexels-photo-8654753.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-      route: '/exploracion',
+      route: '/evaluaciones',
     },
     {
       name: 'MODULO PSICOLOGIA',
