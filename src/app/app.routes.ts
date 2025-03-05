@@ -1,8 +1,9 @@
 import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './components/features/home/home.component';
 import { WelcomeComponent } from './components/features/welcome/welcome.component';
-import { IniciarSesionComponent } from './components/features/iniciar-sesion/iniciar-sesion.component';
-import { RegisterComponent } from './components/features/register/register.component';
+import { IniciarSesionComponent } from './auth/iniciar-sesion/iniciar-sesion.component';
+import { RegisterComponent } from './auth/register/register.component';
 import { HeaderComponent } from './modules/shared/components/header/header.component';
 import { ModulosComponent } from './components/features/modulos/modulos.component';
 import { PerfilComponent } from './components/features/perfil/perfil.component';
@@ -20,12 +21,67 @@ import { PsicologyComponent } from './components/features/psicology/psicology.co
 import { ReportsTestComponent } from './components/features/testModule/reports-test/reports-test.component';
 import { TestPersonalComponent } from './components/features/testModule/test-personal/test-personal.component';
 import { ModuleTestComponent } from './components/features/testModule/module-test/module-test.component';
+import { LayoutComponent } from './layout/layout.component';
+import { PruebaComponent } from './components/component/prueba/prueba.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        component: ModulosComponent,
+      },
+      {
+        path: 'vocacional',
+        component: ModulosVocacionalComponent,
+      },
+      {
+        path: 'perfil',
+        component: PerfilComponent,
+      },
+      {
+        path: 'test',
+        component: TestVocationalComponent,
+      },
+      {
+        path: 'exploracion',
+        component: ExploracionComponent,
+      },
+      {
+        path: 'recomendacion',
+        component: RecommendedActivitiesComponent,
+      },
+      {
+        path: 'foros',
+        component: ForumsComponent,
+      },
+      {
+        path: 'social',
+        component: ModuleIteractionsComponent,
+      },
+      {
+        path: 'actividades',
+        component: LiveActiviesComponent,
+      },
+      {
+        path: 'psicologo',
+        component: PsicologyComponent,
+      },
+      {
+        path: 'reportes',
+        component: ReportsTestComponent,
+      },
+      {
+        path: 'psicologicotest',
+        component: TestPersonalComponent,
+      },
+      {
+        path: 'evaluaciones',
+        component: ModuleTestComponent,
+      },
+    ],
   },
   {
     path: 'home',
@@ -44,60 +100,8 @@ export const routes: Routes = [
     component: WelcomeComponent,
   },
   {
-    path: 'header',
-    component: HeaderComponent,
-  },
-  {
-    path: 'modules',
-    component: ModulosComponent,
-  },
-  {
-    path: 'perfil',
-    component: PerfilComponent,
-  },
-  {
-    path: 'vocacional',
-    component: ModulosVocacionalComponent,
-  },
-  {
-    path: 'test',
-    component: TestVocationalComponent,
-  },
-  {
-    path: 'exploracion',
-    component: ExploracionComponent,
-  },
-  {
-    path: 'recomendacion',
-    component: RecommendedActivitiesComponent,
-  },
-  {
-    path: 'foros',
-    component: ForumsComponent,
-  },
-  {
-    path: 'social',
-    component: ModuleIteractionsComponent,
-  },
-  {
-    path: 'actividades',
-    component: LiveActiviesComponent,
-  },
-  {
-    path: 'psicologo',
-    component: PsicologyComponent,
-  },
-  {
-    path: 'reportes',
-    component: ReportsTestComponent,
-  },
-  {
-    path: 'psicologicotest',
-    component: TestPersonalComponent,
-  },
-  {
-    path: 'evaluaciones',
-    component: ModuleTestComponent,
+    path: '**', // Ruta comodín para manejar rutas no encontradas
+    redirectTo: 'home',
   },
 ];
 

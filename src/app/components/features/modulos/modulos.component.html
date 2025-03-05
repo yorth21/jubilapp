@@ -1,7 +1,4 @@
-<div class="fixed w-full top-0 left-0 shadow-md z-50">
-  <app-header [exitRoute]="'/login'"></app-header>
-</div>
-<div class="bg-[var(--primary-color)] flex flex-col mt-28">
+<div class="bg-[var(--primary-color)] flex flex-col">
   <div
     *ngFor="let module of modules()"
     class="p-4 bg-[var(--primary-color)] rounded-lg shadow-lg m-2 cursor-pointer hover:bg-[var(--second-color)] transition min-w-32 flex flex-col-reverse items-center"

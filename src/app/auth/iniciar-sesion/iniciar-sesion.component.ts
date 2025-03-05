@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { H1HeaderComponent } from '../../component/h1-header/h1-header.component';
-import { IconJubilComponent } from '../../component/icon-jubil/icon-jubil.component';
-import { ButtonIniciarComponent } from '../../component/button-iniciar/button-iniciar.component';
-import { FormLoginComponent } from '../../forms/form-login/form-login.component';
-import { FooterComponent } from '../../../modules/shared/components/footer/footer.component';
+import { H1HeaderComponent } from '../../components/component/h1-header/h1-header.component';
+import { IconJubilComponent } from '../../components/component/icon-jubil/icon-jubil.component';
+import { ButtonIniciarComponent } from '../../components/component/button-iniciar/button-iniciar.component';
+import { FormLoginComponent } from '../../components/forms/form-login/form-login.component';
+import { FooterComponent } from '../../modules/shared/components/footer/footer.component';
 import { Route, Router } from '@angular/router';
 
 @Component({

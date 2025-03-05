@@ -4,11 +4,12 @@ import { ModuloOnlyComponent } from '../../component/modulo-only/modulo-only.com
 import { Module } from '../../../modules/shared/models/module';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { LayoutComponent } from '../../../layout/layout.component';
 
 @Component({
   selector: 'app-modulos',
   standalone: true,
-  imports: [CommonModule, HeaderComponent],
+  imports: [CommonModule],
   templateUrl: './modulos.component.html',
   styleUrl: './modulos.component.css',
 })
