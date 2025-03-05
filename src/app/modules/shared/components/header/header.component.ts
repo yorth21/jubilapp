@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   @Input() exitRoute: string = '';
-  @Input() titulo: String = 'SELECCIONE UN APARTADO';
+  @Input() titulo: String = '';
 
   constructor(private router: Router) {}
 

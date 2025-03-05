@@ -23,6 +23,7 @@ import { TestPersonalComponent } from './components/features/testModule/test-per
 import { ModuleTestComponent } from './components/features/testModule/module-test/module-test.component';
 import { LayoutComponent } from './layout/layout.component';
 import { PruebaComponent } from './components/component/prueba/prueba.component';
+import { ModuloOnlyComponent } from './components/component/modulo-only/modulo-only.component';
 
 export const routes: Routes = [
   {
@@ -102,6 +103,10 @@ export const routes: Routes = [
   {
     path: 'inicio',
     component: WelcomeComponent,
+  },
+  {
+    path: 'card',
+    component: ModuloOnlyComponent,
   },
   {
     path: '**', // Ruta comodín para manejar rutas no encontradas

@@ -7,37 +7,14 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-modulo-only',
   standalone: true,
-  imports: [HeaderComponent, CommonModule],
+  imports: [CommonModule],
   templateUrl: './modulo-only.component.html',
   styleUrl: './modulo-only.component.css',
 })
 export class ModuloOnlyComponent {
   constructor(private router: Router) {}
-
-  modules = signal<Module[]>([
-    {
-      name: 'MODULO DE ORIENTACION VOCACIONAL',
-      img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
-      route: '/vocacional',
-    },
-    {
-      name: 'MODULO DE INTERACCION SOCIAL',
-      img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
-      route: '/interaccion-social',
-    },
-    {
-      name: 'MODULO DE EVALUACIONES PERSONALIZADAS',
-      img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
-      route: '/interaccion-social',
-    },
-    {
-      name: 'MODULO PSICOLOGIA',
-      img: 'https://cdn.pixabay.com/photo/2017/05/26/16/08/glass-2346358_640.png',
-      route: '/interaccion-social',
-    },
-  ]);
-
-  goToModule(route: string) {
-    this.router.navigate([route]);
-  }
+  @Input() title: string = '';
+  @Input() description: string = '';
+  @Input() icon: string = '';
+  @Input() link: string = '';
 }
