@@ -7,12 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [
-    IconJubilComponent,
-    ButtonExitComponent,
-    ButtonExitComponent,
-    MiPerfilComponent,
-  ],
+  imports: [IconJubilComponent, MiPerfilComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
