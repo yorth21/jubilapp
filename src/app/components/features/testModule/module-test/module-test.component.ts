@@ -1,5 +1,4 @@
 import { Component, signal } from '@angular/core';
-import { HeaderComponent } from '../../../../modules/shared/components/header/header.component';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Module } from '../../../../modules/shared/models/module';
@@ -7,7 +6,7 @@ import { Module } from '../../../../modules/shared/models/module';
 @Component({
   selector: 'app-module-test',
   standalone: true,
-  imports: [HeaderComponent, CommonModule],
+  imports: [CommonModule],
   templateUrl: './module-test.component.html',
   styleUrl: './module-test.component.css',
 })

@@ -1,40 +1,39 @@
 <div
-  class="w-3/5 shadow-lg rounded-xl p-6 flex gap-4 border border-gray-200 justify-between mx-auto flex-col overflow-y-auto"
+  *ngIf="meets.length === 0"
+  class="text-center text-gray-500 gap-4 mx-auto shadow-lg w-full"
 >
-  <div *ngIf="meets.length === 0" class="text-center text-gray-500">
-    No hay citas agendadas
-  </div>
-  <div
-    *ngFor="let meet of meets"
-    class="border p-4 rounded-lg shadow-md mb-4 w-full"
-  >
-    <div class="flex justify-between">
-      <div class="flex items-center space-x-4">
-        <img
-          [src]="'assets/img/' + meet.doctorImg"
-          alt="Foto Doctor"
-          class="w-16 h-16 rounded-full border"
-        />
-        <div>
-          <h3 class="font-semibold text-lg">{{ meet.doctorName }}</h3>
-          <p class="text-gray-600 text-sm">
-            <strong>📅 Fecha:</strong> Fecha: {{ meet.date }}
-          </p>
-          <p class="text-gray-600 text-sm">
-            <strong>⏰ Hora:</strong> Hora: {{ meet.time }}
-          </p>
-        </div>
-      </div>
+  No hay citas agendadas
+</div>
+<div
+  *ngFor="let meet of meets"
+  class="p-4 rounded-lg shadow-md mb-4 w-full flex flex-col justify-between bg-[var(--primary-color)]"
+>
+  <div class="flex justify-between items-center">
+    <div class="flex space-x-4 justify-between">
+      <img
+        [src]="
+          'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=600' +
+          meet.doctorImg
+        "
+        alt="Foto Doctor"
+        class="w-16 h-16 rounded-full"
+      />
       <div>
-        <strong>🔗 Meet:</strong
-        ><a
-          [href]="meet.meetLink"
-          target="_blank"
-          class="text-blue-500 hover:underline text-sm block mt-2"
-          >Ir a la reunión</a
-        >
+        <h3 class="font-semibold text-lg">{{ meet.doctorName }}</h3>
+        <p class="text-gray-600 text-sm">
+          <strong>📅 Fecha:</strong> Fecha: {{ meet.date }}
+        </p>
       </div>
     </div>
-    <p class="text-gray-700 mt-2">Motivo: {{ meet.description }}</p>
+    <div class="mr-4">
+      <strong>🔗 Meet:</strong
+      ><a
+        [href]="meet.meetLink"
+        target="_blank"
+        class="text-blue-500 hover:underline text-sm block mt-2"
+        >Ir a la reunión</a
+      >
+    </div>
   </div>
+  <p class="text-gray-700 mt-2">Motivo: {{ meet.description }}</p>
 </div>

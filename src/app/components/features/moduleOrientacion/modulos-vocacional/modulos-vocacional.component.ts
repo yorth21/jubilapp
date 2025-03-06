@@ -1,13 +1,12 @@
 import { Component, signal } from '@angular/core';
-import { HeaderComponent } from '../../../modules/shared/components/header/header.component';
-import { Module } from '../../../modules/shared/models/module';
+import { Module } from '../../../../modules/shared/models/module';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modulos-vocacional',
   standalone: true,
-  imports: [HeaderComponent, CommonModule],
+  imports: [CommonModule],
   templateUrl: './modulos-vocacional.component.html',
   styleUrl: './modulos-vocacional.component.css',
 })

@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-forums',
   standalone: true,
-  imports: [HeaderComponent, ChatBoxComponent, CommonModule],
+  imports: [ChatBoxComponent, CommonModule],
   templateUrl: './forums.component.html',
   styleUrl: './forums.component.css',
 })

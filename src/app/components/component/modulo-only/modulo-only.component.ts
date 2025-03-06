@@ -1,6 +1,4 @@
 import { Component, Input, signal } from '@angular/core';
-import { Module } from '../../../modules/shared/models/module';
-import { HeaderComponent } from '../../../modules/shared/components/header/header.component';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 

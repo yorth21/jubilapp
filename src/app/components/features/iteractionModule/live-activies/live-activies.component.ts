@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { HeaderComponent } from '../../../../modules/shared/components/header/header.component';
 import { Router } from '@angular/router';
 import { Activity } from '../../../../modules/shared/models/activity';
 
 @Component({
   selector: 'app-live-activies',
   standalone: true,
-  imports: [CommonModule, HeaderComponent],
+  imports: [CommonModule],
   templateUrl: './live-activies.component.html',
   styleUrl: './live-activies.component.css',
 })

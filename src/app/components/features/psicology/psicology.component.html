@@ -1,7 +1,7 @@
-<div class="min-h-screen">
-  <div class="flex justify-center space-x-4 mt-4">
+<div class="min-h-screen mt-16 fixed w-full">
+  <div class="flex justify-center space-x-4 mt-4 fixed w-full top-28">
     <button
-      (click)="seleccionarForo('BAILOTERAPIA')"
+      (click)="seleccionarForo('obtenerCita')"
       class="px-4 py-2 bg-[var(--background-color)] text-[var(--primary-color)] font-serif rounded-lg shadow transition-colors duration-300 text-xl"
       [ngClass]="{
         'bg-[var(--background-color)] text-[var(--primary-color)]': !isInverted,
@@ -12,7 +12,7 @@
     </button>
 
     <button
-      (click)="seleccionarForo('CAMINATAS')"
+      (click)="seleccionarForo('misCitas')"
       class="px-4 py-2 bg-[var(--second-color)] text-[var(--text-color)] rounded-lg shadow transition-colors duration-300 font-serif text-2xl"
       [ngClass]="{
         'bg-[var(--second-color)] text-[var(--text-color)]': !isInverted,
@@ -24,16 +24,16 @@
   </div>
 
   <div
-    *ngIf="selectedForo === 'BAILOTERAPIA'"
-    class="transition-all duration-500 animate-slide-in mt-6"
+    *ngIf="selectedForo === 'obtenerCita'"
+    class="transition-all duration-500 animate-slide-in w-full mx-auto"
   >
-    <app-form-meet></app-form-meet>
+    <app-form-meet class="w-full"></app-form-meet>
   </div>
 
   <div
-    *ngIf="selectedForo === 'CAMINATAS'"
-    class="transition-all duration-500 animate-slide-in text-center mt-6 mx-auto w-full"
+    *ngIf="selectedForo === 'misCitas'"
+    class="transition-all duration-500 animate-slide-in text-center mx-auto w-4/5 border-none flex items-center justify-center"
   >
-    <app-meeting-info></app-meeting-info>
+    <app-meeting-info class="w-full"></app-meeting-info>
   </div>
 </div>

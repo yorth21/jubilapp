@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../../modules/shared/components/header/header.component';
 import { FormMeetComponent } from '../../forms/form-meet/form-meet.component';
 import { CommonModule } from '@angular/common';
 import { MeetingInfoComponent } from '../../component/meeting-info/meeting-info.component';
@@ -8,7 +7,6 @@ import { MeetingInfoComponent } from '../../component/meeting-info/meeting-info.
   selector: 'app-psicology',
   standalone: true,
   imports: [
-    HeaderComponent,
     FormMeetComponent,
     CommonModule,
     MeetingInfoComponent,
@@ -21,8 +19,8 @@ export class PsicologyComponent {
   isInverted = false;
   selectedForo: string | null = null;
   mensajesPorForo: { [key: string]: string[] } = {
-    BAILOTERAPIA: [],
-    CAMINATAS: [],
+    obtenerCita: [],
+    misCitas: [],
   };
 
   seleccionarForo(foro: string) {

@@ -2,12 +2,11 @@ import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Module } from '../../../../modules/shared/models/module';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../../../../modules/shared/components/header/header.component';
 
 @Component({
   selector: 'app-module-iteractions',
   standalone: true,
-  imports: [CommonModule, HeaderComponent],
+  imports: [CommonModule],
   templateUrl: './module-iteractions.component.html',
   styleUrl: './module-iteractions.component.css',
 })

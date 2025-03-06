@@ -1,5 +1,4 @@
 import { RouterModule, Routes } from '@angular/router';
-
 import { HomeComponent } from './components/features/home/home.component';
 import { WelcomeComponent } from './components/features/welcome/welcome.component';
 import { IniciarSesionComponent } from './auth/iniciar-sesion/iniciar-sesion.component';
@@ -8,10 +7,8 @@ import { HeaderComponent } from './modules/shared/components/header/header.compo
 import { ModulosComponent } from './components/features/modulos/modulos.component';
 import { PerfilComponent } from './components/features/perfil/perfil.component';
 import { NgModule } from '@angular/core';
-import { ModulosVocacionalComponent } from './components/features/modulos-vocacional/modulos-vocacional.component';
-import { TestVocationalComponent } from './components/features/test-vocational/test-vocational.component';
-import { ExploracionComponent } from './components/features/exploracion/exploracion.component';
-import { RecommendedActivitiesComponent } from './components/features/recommended-activities/recommended-activities.component';
+import { TestVocationalComponent } from './components/features/moduleOrientacion/test-vocational/test-vocational.component';
+import { RecommendedActivitiesComponent } from './components/features/moduleOrientacion/recommended-activities/recommended-activities.component';
 import { ChatBoxComponent } from './components/component/chat-box/chat-box.component';
 import { ForumsComponent } from './components/features/iteractionModule/forums/forums.component';
 import { ModuleIteractionsComponent } from './components/features/iteractionModule/module-iteractions/module-iteractions.component';
@@ -24,6 +21,8 @@ import { ModuleTestComponent } from './components/features/testModule/module-tes
 import { LayoutComponent } from './layout/layout.component';
 import { PruebaComponent } from './components/component/prueba/prueba.component';
 import { ModuloOnlyComponent } from './components/component/modulo-only/modulo-only.component';
+import { ModulosVocacionalComponent } from './components/features/moduleOrientacion/modulos-vocacional/modulos-vocacional.component';
+import { ExploracionComponent } from './components/features/moduleOrientacion/exploracion/exploracion.component';
 
 export const routes: Routes = [
   {
@@ -67,7 +66,7 @@ export const routes: Routes = [
         component: LiveActiviesComponent,
       },
       {
-        path: 'psicologo',
+        path: 'citas',
         component: PsicologyComponent,
       },
       {
