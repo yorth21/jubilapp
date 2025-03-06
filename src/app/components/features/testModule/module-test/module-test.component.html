@@ -1,16 +1,9 @@
-<div
-  *ngFor="let module of modules()"
-  class="p-4 bg-[var(--primary-color)] rounded-lg shadow-lg m-2 cursor-pointer hover:bg-[var(--second-color)] transition min-w-32 flex flex-col-reverse items-center"
-  (click)="goToModule(module.route)"
->
-  <img
-    [src]="module.img"
-    alt="Modulo"
-    class="w-full h-32 object-cover rounded-lg"
-  />
-  <h2
-    class="text-center font-bold mt-2 font-serif text-3xl text-[var(--text2-color)]"
-  >
-    {{ module.name }}
-  </h2>
+<div class="flex justify-center gap-6 flex-wrap">
+  <app-modulo-only
+    *ngFor="let card of cards"
+    [title]="card.title"
+    [description]="card.description"
+    [icon]="card.icon"
+    [link]="card.link"
+  ></app-modulo-only>
 </div>
