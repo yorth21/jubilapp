@@ -34,6 +34,10 @@ export const routes: Routes = [
         component: ModulosComponent,
       },
       {
+        path: 'modules',
+        component: ModulosComponent,
+      },
+      {
         path: 'vocacional',
         component: ModulosVocacionalComponent,
       },
