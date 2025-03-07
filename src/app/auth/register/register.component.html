@@ -10,6 +10,10 @@
     <div class="w-40">
       <app-icon-jubil></app-icon-jubil>
     </div>
-    <div class="h-96"><app-form-register></app-form-register></div>
+    <div class="h-96">
+      <app-form-register
+        (datosRegistro)="recibirDatosRegistro($event)"
+      ></app-form-register>
+    </div>
   </div>
 </div>

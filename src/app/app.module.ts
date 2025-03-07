@@ -5,10 +5,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormVocationalComponent } from './components/forms/form-vocational/form-vocational.component';
 import { AppRoutingModule } from './app.routes';
 import { AuthModule } from './auth/auth.module';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
-  imports: [BrowserModule, ReactiveFormsModule, AppRoutingModule, AuthModule],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    AuthModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [],
 })

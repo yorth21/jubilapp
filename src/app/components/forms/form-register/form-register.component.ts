@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -22,6 +22,7 @@ import { ButtonRegistreComponent } from '../../component/button-registre/button-
   styleUrl: './form-register.component.css',
 })
 export class FormRegisterComponent {
+  @Output() datosRegistro = new EventEmitter<any>();
   registerForm: FormGroup;
 
   constructor(private fb: FormBuilder) {

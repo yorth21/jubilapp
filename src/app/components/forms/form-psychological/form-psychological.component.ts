@@ -37,7 +37,15 @@ export class FormPsychologicalComponent implements OnInit {
     });
   }
   sendAnswers() {
-    console.log(this.form.value);
+    const respuestas = this.form.value;
+    this.testPsychologicalService.enviarRespuestas(respuestas).subscribe(
+      (response) => {
+        console.log('Respuestas enviadas con éxito', response);
+      },
+      (error) => {
+        console.error('Error al enviar las respuestas', error);
+      }
+    );
   }
 
   selectAnswer(cuestionId: number, selected: string) {

@@ -4,10 +4,12 @@ import { IconJubilComponent } from '../../components/component/icon-jubil/icon-j
 import { ButtonIniciarComponent } from '../../components/component/button-iniciar/button-iniciar.component';
 import { FormLoginComponent } from '../../components/forms/form-login/form-login.component';
 import { FooterComponent } from '../../modules/shared/components/footer/footer.component';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
-  selector: 'app-iniciar-sesion',
+  selector: 'app-login',
   standalone: true,
   imports: [
     H1HeaderComponent,
@@ -15,18 +17,16 @@ import { Route, Router } from '@angular/router';
     ButtonIniciarComponent,
     FormLoginComponent,
     FooterComponent,
+    HttpClientModule,
   ],
-  templateUrl: './iniciar-sesion.component.html',
-  styleUrl: './iniciar-sesion.component.css',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css',
 })
-export class IniciarSesionComponent {
+export class LoginComponent {
   cedula: string = '';
   password: string = '';
-  //daticos de prueba
-  usuariosValidos = [
-    { cedula: '12345', password: '123' },
-    { cedula: '87654321', password: 'segura456' },
-  ];
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   recibirDatosFormulario(datos: { cedula: string; password: string }) {
     this.cedula = datos.cedula;
@@ -38,15 +38,17 @@ export class IniciarSesionComponent {
       alert('Por favor ingrese cédula y contraseña.');
       return;
     }
-    const usuarioEncontrado = this.usuariosValidos.find(
-      (user) => user.cedula === this.cedula && user.password === this.password
-    );
 
-    if (!usuarioEncontrado) {
-      alert('Cédula o contraseña incorrecta.');
-      return;
-    }
+    this.authService.login(this.cedula, this.password).subscribe({
+      next: (response) => {
+        console.log('Autenticado con éxito', response);
 
-    console.log('Autenticado con éxito');
+        this.router.navigate(['/modules']);
+      },
+      error: (error) => {
+        console.error('Error en la autenticación', error);
+        alert('Cédula o contraseña incorrecta.');
+      },
+    });
   }
 }

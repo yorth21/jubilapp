@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 interface Cuestion {
   id: number;
   texto: string;
@@ -11,6 +12,15 @@ interface Cuestion {
   providedIn: 'root',
 })
 export class TestPsychologicalService {
+  private apiUrl = 'https://tu-api.com/endpoint'; // Reemplaza con la URL de tu API
+
+  constructor(private http: HttpClient) {}
+
+  // Método para enviar las respuestas a la API
+  enviarRespuestas(respuestas: any): Observable<any> {
+    return this.http.post(this.apiUrl, respuestas);
+  }
+
   private cuestions: Cuestion[] = [
     {
       id: 1,

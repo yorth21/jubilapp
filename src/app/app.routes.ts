@@ -1,7 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/features/home/home.component';
 import { WelcomeComponent } from './components/features/welcome/welcome.component';
-import { IniciarSesionComponent } from './auth/iniciar-sesion/iniciar-sesion.component';
+import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { HeaderComponent } from './modules/shared/components/header/header.component';
 import { ModulosComponent } from './components/features/modulos/modulos.component';
@@ -101,7 +101,7 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: IniciarSesionComponent,
+    component: LoginComponent,
   },
   {
     path: 'inicio',
