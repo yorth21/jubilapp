@@ -2,10 +2,10 @@
   class="w-full flex flex-col items-center justify-center min-h-screen bg-[var(--background-color)] rounded-md"
 >
   <div
-    class="p-12 m-6 rounded-lg shadow-lg min-w-96 flex flex-col items-center bg-[var(--primary-color)] ]"
+    class="p-12 m-6 rounded-lg shadow-lg min-w-96 flex flex-col items-center bg-[var(--primary-color)]"
   >
     <div class="p-5">
-      <app-h1-header> </app-h1-header>
+      <app-h1-header></app-h1-header>
     </div>
     <div class="p-5 w-60 h-52">
       <app-icon-jubil></app-icon-jubil>
@@ -15,7 +15,6 @@
         (datosIngresados)="recibirDatosFormulario($event)"
       ></app-form-login>
     </div>
-    <div (click)="goToModules()"><app-button-iniciar></app-button-iniciar></div>
     <div class="">
       <app-footer></app-footer>
     </div>

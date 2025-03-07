@@ -9,13 +9,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    AuthModule,
-    HttpClientModule,
-  ],
+  imports: [BrowserModule, ReactiveFormsModule, AppRoutingModule],
   providers: [],
   bootstrap: [],
 })

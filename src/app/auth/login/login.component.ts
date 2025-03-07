@@ -6,7 +6,7 @@ import { FormLoginComponent } from '../../components/forms/form-login/form-login
 import { FooterComponent } from '../../modules/shared/components/footer/footer.component';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -14,39 +14,53 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     H1HeaderComponent,
     IconJubilComponent,
-    ButtonIniciarComponent,
+
     FormLoginComponent,
     FooterComponent,
-    HttpClientModule,
+    CommonModule,
   ],
+
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  cedula: string = '';
+  identification: string = '';
   password: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  recibirDatosFormulario(datos: { cedula: string; password: string }) {
-    this.cedula = datos.cedula;
+  recibirDatosFormulario(datos: { identification: string; password: string }) {
+    console.log('Datos recibidos en el padre:', datos);
+    this.identification = datos.identification;
     this.password = datos.password;
+    this.goToModules();
   }
 
   goToModules() {
-    if (!this.cedula || !this.password) {
+    console.log(
+      'Intentando iniciar sesión con:',
+      this.identification,
+      this.password
+    );
+
+    if (!this.identification || !this.password) {
       alert('Por favor ingrese cédula y contraseña.');
       return;
     }
 
-    this.authService.login(this.cedula, this.password).subscribe({
+    this.authService.login(this.identification, this.password).subscribe({
       next: (response) => {
-        console.log('Autenticado con éxito', response);
+        console.log('Respuesta completa del servidor:', response); // 🔍 Revisa esto en la consola
 
-        this.router.navigate(['/modules']);
+        if (response && response.accessToken) {
+          localStorage.setItem('token', response.accessToken);
+          this.router.navigate(['/modules']);
+        } else {
+          alert('No se recibió un token válido.');
+        }
       },
       error: (error) => {
-        console.error('Error en la autenticación', error);
+        console.error('Error en la autenticación:', error);
         alert('Cédula o contraseña incorrecta.');
       },
     });

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-form-login',
@@ -10,15 +10,26 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './form-login.component.css',
 })
 export class FormLoginComponent {
-  cedula: string = '';
+  identification: string = '';
   password: string = '';
 
   @Output() datosIngresados = new EventEmitter<{
-    cedula: string;
+    identification: string;
     password: string;
   }>();
 
   enviarDatos() {
-    this.datosIngresados.emit({ cedula: this.cedula, password: this.password });
+    if (!this.identification || !this.password) {
+      alert('Por favor, ingresa tu cédula y contraseña.');
+      return;
+    }
+    console.log('Datos emitidos:', {
+      identification: this.identification,
+      password: this.password,
+    });
+    this.datosIngresados.emit({
+      identification: this.identification,
+      password: this.password,
+    });
   }
 }
