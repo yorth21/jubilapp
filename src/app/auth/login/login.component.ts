@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { H1HeaderComponent } from '../../components/component/h1-header/h1-header.component';
 import { IconJubilComponent } from '../../components/component/icon-jubil/icon-jubil.component';
-import { ButtonIniciarComponent } from '../../components/component/button-iniciar/button-iniciar.component';
 import { FormLoginComponent } from '../../components/forms/form-login/form-login.component';
 import { FooterComponent } from '../../modules/shared/components/footer/footer.component';
 import { Router } from '@angular/router';
@@ -14,7 +13,6 @@ import { CommonModule } from '@angular/common';
   imports: [
     H1HeaderComponent,
     IconJubilComponent,
-
     FormLoginComponent,
     FooterComponent,
     CommonModule,
@@ -50,7 +48,7 @@ export class LoginComponent {
 
     this.authService.login(this.identification, this.password).subscribe({
       next: (response) => {
-        console.log('Respuesta completa del servidor:', response); // 🔍 Revisa esto en la consola
+        console.log('Respuesta completa del servidor:', response);
 
         if (response && response.accessToken) {
           localStorage.setItem('token', response.accessToken);
