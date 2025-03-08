@@ -23,6 +23,7 @@ import { PruebaComponent } from './components/component/prueba/prueba.component'
 import { ModuloOnlyComponent } from './components/component/modulo-only/modulo-only.component';
 import { ModulosVocacionalComponent } from './components/features/moduleOrientacion/modulos-vocacional/modulos-vocacional.component';
 import { ExploracionComponent } from './components/features/moduleOrientacion/exploracion/exploracion.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -32,58 +33,72 @@ export const routes: Routes = [
       {
         path: '',
         component: ModulosComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'modules',
         component: ModulosComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'vocacional',
         component: ModulosVocacionalComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'perfil',
         component: PerfilComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'test',
         component: TestVocationalComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'exploracion',
         component: ExploracionComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'recomendacion',
         component: RecommendedActivitiesComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'foros',
         component: ForumsComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'social',
         component: ModuleIteractionsComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'actividades',
         component: LiveActiviesComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'citas',
         component: PsicologyComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'reportes',
         component: ReportsTestComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'psicologicotest',
         component: TestPersonalComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'evaluaciones',
         component: ModuleTestComponent,
+        canActivate: [AuthGuard],
       },
     ],
   },

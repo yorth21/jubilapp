@@ -1,6 +1,9 @@
 <header
   class="flex justify-between items-center px-6 py-2 bg-[var(--background2-color)] border-b-2 border-gray-500"
 >
+  <button *ngIf="isAuthenticated()" (click)="logout()" class="logout-btn">
+    Cerrar sesión
+  </button>
   <div class="w-14">
     <app-icon-jubil></app-icon-jubil>
   </div>

@@ -26,6 +26,12 @@ export class LoginComponent {
   password: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
+  ngOnInit() {
+    // Si ya hay una sesión activa, redirigir a "modules"
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/modules']);
+    }
+  }
 
   recibirDatosFormulario(datos: { identification: string; password: string }) {
     console.log('Datos recibidos en el padre:', datos);
@@ -45,7 +51,7 @@ export class LoginComponent {
         console.log('Respuesta completa del servidor:', response);
 
         if (response && response.accessToken) {
-          localStorage.setItem('token', response.accessToken);
+          this.authService.saveToken(response.accessToken);
           this.router.navigate(['/modules']);
         } else {
           alert('No se recibió un token válido.');

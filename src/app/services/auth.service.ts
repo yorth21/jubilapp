@@ -42,13 +42,27 @@ export class AuthService {
   login(identification: string, password: string): Observable<any> {
     return this.http.post<any>(this.apiUrl, { identification, password }).pipe(
       tap((response) => {
-        if (response && response.accessToken) {
-          localStorage.setItem('token', response.accessToken);
-          localStorage.setItem('user', JSON.stringify(response.user)); // Guardar usuario
-          this.userData.next(response.user);
+        if (response.accessToken) {
+          this.saveToken(response.accessToken);
         }
       })
     );
+  }
+  saveToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+  logout() {
+    localStorage.removeItem('token');
+  }
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token'); // Devuelve true si hay token en localStorage
+  }
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
   }
   getUserData(): Observable<any> {
     return this.userData.asObservable();
