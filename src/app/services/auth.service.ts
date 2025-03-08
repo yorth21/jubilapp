@@ -1,14 +1,22 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 interface LoginResponse {
-  token: string;
+  accessToken: string;
   user: {
     id: number;
+    names: string;
+    lastNames: string;
     identification: string;
-    name: string;
+    email: string;
+    phone: string;
+    address: string;
+    gender: string;
+    birthDate: string;
+    job: string;
+    isActive: boolean;
   };
 }
 
@@ -25,17 +33,31 @@ interface RegisterResponse {
   providedIn: 'root',
 })
 export class AuthService {
+  private userData = new BehaviorSubject<any>(null);
   private apiUrl = 'http://localhost:4000/auth/login';
 
   constructor(private http: HttpClient) {}
 
   login(identification: string, password: string): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<any>(this.apiUrl, { identification, password }).pipe(
+      tap((response) => {
+        if (response && response.accessToken) {
+          localStorage.setItem('token', response.accessToken);
+          localStorage.setItem('user', JSON.stringify(response.user)); // Guardar usuario
+          this.userData.next(response.user);
+        }
+      })
+    );
+  }
+  getUserData(): Observable<any> {
+    return this.userData.asObservable();
+  }
 
-    const body = { identification, password };
-    console.log('Enviando datos al backend:', body); // 🔍 Verifica en la consola
-
-    return this.http.post<any>(this.apiUrl, body, { headers });
+  loadUserFromStorage() {
+    const user = localStorage.getItem('user');
+    if (user) {
+      this.userData.next(JSON.parse(user));
+    }
   }
 
   register(userData: any): Observable<RegisterResponse> {

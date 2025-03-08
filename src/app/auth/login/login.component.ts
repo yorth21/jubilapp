@@ -35,12 +35,6 @@ export class LoginComponent {
   }
 
   goToModules() {
-    console.log(
-      'Intentando iniciar sesión con:',
-      this.identification,
-      this.password
-    );
-
     if (!this.identification || !this.password) {
       alert('Por favor ingrese cédula y contraseña.');
       return;
