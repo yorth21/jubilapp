@@ -7,17 +7,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ButtonRegistreComponent } from '../../component/button-registre/button-registre.component';
 
 @Component({
   selector: 'app-form-register',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ButtonRegistreComponent,
-  ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './form-register.component.html',
   styleUrl: './form-register.component.css',
 })
@@ -27,11 +21,19 @@ export class FormRegisterComponent {
 
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group({
-      nombre: ['', Validators.required],
-      cedula: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-      contraseña: ['', [Validators.required, Validators.minLength(6)]],
-      direccion: ['', Validators.required],
-      edad: ['', [Validators.required, Validators.min(18)]],
+      names: ['', Validators.required],
+      lastNames: ['', Validators.required],
+      identification: [
+        '',
+        [Validators.required, Validators.pattern('^[0-9]+$')],
+      ],
+      email: ['', [Validators.required, Validators.email]],
+      address: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      birthDate: ['', Validators.required],
+      gender: ['', Validators.required],
+      job: ['', Validators.required],
     });
   }
 
@@ -42,6 +44,7 @@ export class FormRegisterComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       console.log('Formulario enviado:', this.registerForm.value);
+      this.datosRegistro.emit(this.registerForm.value);
     } else {
       console.log('Formulario inválido');
     }

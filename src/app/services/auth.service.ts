@@ -35,6 +35,7 @@ interface RegisterResponse {
 export class AuthService {
   private userData = new BehaviorSubject<any>(null);
   private apiUrl = 'http://localhost:4000/auth/login';
+  private apiUrl2 = 'http://localhost:4000/users';
 
   constructor(private http: HttpClient) {}
 
@@ -61,13 +62,11 @@ export class AuthService {
   }
 
   register(userData: any): Observable<RegisterResponse> {
-    return this.http
-      .post<RegisterResponse>(`${this.apiUrl}/register`, userData)
-      .pipe(
-        catchError((error) => {
-          console.error('Error en el registro:', error);
-          return throwError(() => new Error('Error en el registro'));
-        })
-      );
+    return this.http.post<RegisterResponse>(`${this.apiUrl2}`, userData).pipe(
+      catchError((error) => {
+        console.error('Error en el registro:', error);
+        return throwError(() => new Error('Error en el registro'));
+      })
+    );
   }
 }

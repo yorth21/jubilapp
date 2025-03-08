@@ -1,62 +1,179 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <div class="grid grid-cols-2 gap-2 h-64">
-    <label class="block text-center">
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="w-ful">
+  <div class="grid grid-cols-3 gap-2 h-64 my-3 w-full">
+    <label class="flex text-center flex-col items-center">
       <span class="text-[var(--text-color)] font-semibold font-serif"
-        >NOMBRE</span
+        >Nombre</span
       >
       <input
         type="text"
-        formControlName="nombre"
-        class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
+        formControlName="names"
+        placeholder="Ingrese su Nombre"
+        class="input-field text-[var(--text-color)] border rounded-md p-2"
       />
+      <div class="error-container">
+        <div
+          *ngIf="f['names'].invalid && f['names'].touched"
+          class="error-message"
+        >
+          Apellidos son obligatorios.
+        </div>
+      </div>
     </label>
 
-    <label class="block text-center">
+    <label class="flex text-center flex-col items-center">
       <span class="text-[var(--text-color)] font-semibold font-serif"
-        >CÉDULA</span
+        >Apellidos</span
       >
       <input
         type="text"
-        formControlName="cedula"
-        class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
+        formControlName="lastNames"
+        placeholder="Ingrese sus Apellidos"
+        class="input-field text-[var(--text-color)] border rounded-md p-2"
+      />
+      <div class="error-container">
+        <div
+          *ngIf="f['lastNames'].invalid && f['lastNames'].touched"
+          class="error-message"
+        >
+          Ingrese un Apellido válido.
+        </div>
+      </div>
+    </label>
+
+    <label class="flex text-center flex-col items-center">
+      <span class="text-[var(--text-color)] font-semibold font-serif"
+        >Cédula</span
+      >
+      <input
+        type="text"
+        formControlName="identification"
+        placeholder="Ingrese su Documento"
+        class="input-field text-[var(--text-color)] border rounded-md p-2"
+      />
+      <div class="error-container">
+        <div
+          *ngIf="f['identification'].invalid && f['identification'].touched"
+          class="error-message"
+        >
+          Ingrese una identification válida.
+        </div>
+      </div>
+    </label>
+
+    <label class="flex text-center flex-col items-center">
+      <span class="text-[var(--text-color)] font-semibold font-serif"
+        >Correo Electrónico</span
+      >
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="Ingrese su Email"
+        class="input-field text-[var(--text-color)] border rounded-md p-2"
+      />
+      <div class="error-container">
+        <div
+          *ngIf="f['email'].invalid && f['email'].touched"
+          class="error-message"
+        >
+          Ingrese un email válido.
+        </div>
+      </div>
+    </label>
+
+    <label class="flex text-center flex-col items-center">
+      <span class="text-[var(--text-color)] font-semibold font-serif"
+        >Dirección</span
+      >
+      <input
+        type="text"
+        formControlName="address"
+        placeholder="Ingrese su Dirección"
+        class="input-field text-[var(--text-color)] border rounded-md p-2"
       />
     </label>
 
-    <label class="block text-center">
+    <label class="flex text-center flex-col items-center">
       <span class="text-[var(--text-color)] font-semibold font-serif"
-        >CONTRASEÑA</span
+        >Teléfono</span
+      >
+      <input
+        type="tel"
+        formControlName="phone"
+        placeholder="Ingrese su Teléfono"
+        class="input-field text-[var(--text-color)] border rounded-md p-2"
+      />
+      <div class="error-container">
+        <div
+          *ngIf="f['phone'].invalid && f['phone'].touched"
+          class="error-message"
+        >
+          Teléfono debe ser de 10 dígitos numéricos.
+        </div>
+      </div>
+    </label>
+
+    <label class="flex text-center flex-col items-center">
+      <span class="text-[var(--text-color)] font-semibold font-serif"
+        >Contraseña</span
       >
       <input
         type="password"
-        formControlName="contraseña"
-        class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
+        formControlName="password"
+        placeholder="Ingrese su Contraseña"
+        class="input-field text-[var(--text-color)] border rounded-md p-2"
+      />
+      <div class="error-container">
+        <div
+          *ngIf="f['password'].invalid && f['password'].touched"
+          class="error-message"
+        >
+          La contraseña debe tener al menos 6 caracteres.
+        </div>
+      </div>
+    </label>
+
+    <label class="flex text-center flex-col items-center">
+      <span class="text-[var(--text-color)] font-semibold font-serif"
+        >Fecha de Nacimiento</span
+      >
+      <input
+        type="date"
+        formControlName="birthDate"
+        class="input-field text-[var(--text-color)] border rounded-md p-2"
       />
     </label>
 
-    <label class="block text-center">
+    <label class="flex text-center flex-col items-center">
       <span class="text-[var(--text-color)] font-semibold font-serif"
-        >DIRECCIÓN</span
+        >Sexo</span
       >
       <input
         type="text"
-        formControlName="direccion"
-        class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
+        formControlName="gender"
+        placeholder="M / F"
+        class="input-field text-[var(--text-color)] border rounded-md p-2"
       />
     </label>
 
-    <label class="block text-center">
+    <label class="flex text-center flex-col items-center">
       <span class="text-[var(--text-color)] font-semibold font-serif"
-        >EDAD</span
+        >Profesión</span
       >
       <input
-        type="number"
-        formControlName="edad"
-        class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none"
+        type="text"
+        formControlName="job"
+        placeholder="Ingrese su Profesión"
+        class="input-field text-[var(--text-color)] border rounded-md p-2"
       />
     </label>
   </div>
 
   <div class="flex flex-col items-center mt-4">
-    <app-button-registre></app-button-registre>
+    <button
+      type="submit"
+      class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"
+    >
+      Registrar
+    </button>
   </div>
 </form>
