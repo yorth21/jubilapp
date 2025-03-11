@@ -27,7 +27,6 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
   ngOnInit() {
-    // Si ya hay una sesión activa, redirigir a "modules"
     if (this.authService.isAuthenticated()) {
       this.router.navigate(['/modules']);
     }

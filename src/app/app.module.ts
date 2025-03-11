@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormVocationalComponent } from './components/forms/form-vocational/form-vocational.component';
 import { AppRoutingModule } from './app.routes';
-import { AuthModule } from './auth/auth.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './services/auth.interceptor.service';
 
 @NgModule({
   declarations: [],

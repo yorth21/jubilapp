@@ -37,17 +37,31 @@ export class AuthService {
   private apiUrl = 'http://localhost:4000/auth/login';
   private apiUrl2 = 'http://localhost:4000/users';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.loadUserFromStorage();
+  }
 
   login(identification: string, password: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { identification, password }).pipe(
-      tap((response) => {
-        if (response.accessToken) {
-          this.saveToken(response.accessToken);
-        }
-      })
-    );
+    return this.http
+      .post<LoginResponse>(this.apiUrl, { identification, password })
+      .pipe(
+        tap((response) => {
+          if (response.accessToken) {
+            this.saveToken(response.accessToken);
+            this.saveUser(response.user);
+          }
+        }),
+        catchError((error) => {
+          console.error('Error en el login:', error);
+          return throwError(() => new Error('Error en el login'));
+        })
+      );
   }
+  saveUser(user: any) {
+    localStorage.setItem('user', JSON.stringify(user));
+    this.userData.next(user);
+  }
+
   saveToken(token: string) {
     localStorage.setItem('token', token);
   }
@@ -59,7 +73,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token'); // Devuelve true si hay token en localStorage
+    return !!localStorage.getItem('token');
   }
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
