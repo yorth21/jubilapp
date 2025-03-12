@@ -20,7 +20,7 @@ export class ModulosComponent {
   cards = [
     {
       title: 'Módulo de Orientación Vocacional',
-      description: 'Descubre tu vocación y planifica tu futuro.',
+      description: 'Descubre tu vocación y planifica tu futuro ahora.',
       icon: 'https://images.pexels.com/photos/3789100/pexels-photo-3789100.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       link: '/vocacional',
     },

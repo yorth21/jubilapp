@@ -6,7 +6,9 @@
     <p class="text-xl mb-10">Inscribete en las actividades que más te gusten</p>
     <span>Inscribete ahora</span>
   </div>
-  <div class="flex justify-center gap-6 flex-wrap">
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center gap-6 flex-wrap w-full"
+  >
     <app-modulo-only
       *ngFor="let card of cards"
       [title]="card.title"
