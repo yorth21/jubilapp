@@ -6,59 +6,58 @@ import { FooterComponent } from '../../modules/shared/components/footer/footer.c
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
-    H1HeaderComponent,
-    IconJubilComponent,
-    FormLoginComponent,
-    FooterComponent,
+    // H1HeaderComponent,
+    // IconJubilComponent,
+    // FormLoginComponent,
+    // FooterComponent,
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  identification: string = '';
-  password: string = '';
+  loginForm: FormGroup;
+  errorMessage: string | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
-  ngOnInit() {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/modules']);
-    }
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    this.loginForm = this.fb.group({
+      identification: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
   }
 
-  recibirDatosFormulario(datos: { identification: string; password: string }) {
-    console.log('Datos recibidos en el padre:', datos);
-    this.identification = datos.identification;
-    this.password = datos.password;
-    this.goToModules();
-  }
-
-  goToModules() {
-    if (!this.identification || !this.password) {
-      alert('Por favor ingrese cédula y contraseña.');
+  login() {
+    if (this.loginForm.invalid) {
       return;
     }
 
-    this.authService.login(this.identification, this.password).subscribe({
-      next: (response) => {
-        console.log('Respuesta completa del servidor:', response);
-
-        if (response && response.accessToken) {
-          this.authService.saveToken(response.accessToken);
-          this.router.navigate(['/modules']);
-        } else {
-          alert('No se recibió un token válido.');
-        }
+    const { identification, password } = this.loginForm.value;
+    this.authService.login(identification, password).subscribe({
+      next: () => {
+        this.router.navigate(['/modules']); // 🚀 Redirigir después del login
       },
-      error: (error) => {
-        console.error('Error en la autenticación:', error);
-        alert('Cédula o contraseña incorrecta.');
+      error: (err) => {
+        this.errorMessage = 'Usuario o contraseña incorrectos';
+        console.error('Error en login:', err);
       },
     });
   }

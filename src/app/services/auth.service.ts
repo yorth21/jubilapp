@@ -33,22 +33,30 @@ interface RegisterResponse {
   providedIn: 'root',
 })
 export class AuthService {
+  private BASE_URL = 'http://localhost:4000'; // URL base de la API
+  private TOKEN_KEY = 'token';
+  private USER_KEY = 'user';
+
   private userData = new BehaviorSubject<any>(null);
-  private apiUrl = 'http://localhost:4000/auth/login';
-  private apiUrl2 = 'http://localhost:4000/users';
+  private authStatus = new BehaviorSubject<boolean>(this.hasToken());
 
   constructor(private http: HttpClient) {
     this.loadUserFromStorage();
   }
 
-  login(identification: string, password: string): Observable<any> {
+  // 🔹 LOGIN
+  login(identification: string, password: string): Observable<LoginResponse> {
     return this.http
-      .post<LoginResponse>(this.apiUrl, { identification, password })
+      .post<LoginResponse>(`${this.BASE_URL}/auth/login`, {
+        identification,
+        password,
+      })
       .pipe(
         tap((response) => {
           if (response.accessToken) {
             this.saveToken(response.accessToken);
             this.saveUser(response.user);
+            this.authStatus.next(true); // 🔥 Notifica que el usuario está autenticado
           }
         }),
         catchError((error) => {
@@ -57,44 +65,64 @@ export class AuthService {
         })
       );
   }
-  saveUser(user: any) {
-    localStorage.setItem('user', JSON.stringify(user));
+
+  // 🔹 REGISTRO
+  register(userData: any): Observable<RegisterResponse> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http
+      .post<RegisterResponse>(`${this.BASE_URL}/users`, userData, { headers })
+      .pipe(
+        catchError((error) => {
+          console.error('Error en el registro:', error);
+          return throwError(() => new Error('Error en el registro'));
+        })
+      );
+  }
+
+  // 🔹 GUARDAR DATOS DEL USUARIO
+  private saveUser(user: any) {
+    localStorage.setItem(this.USER_KEY, JSON.stringify(user));
     this.userData.next(user);
   }
 
-  saveToken(token: string) {
-    localStorage.setItem('token', token);
-  }
-  logout() {
-    localStorage.removeItem('token');
-  }
-  getToken(): string | null {
-    return localStorage.getItem('token');
+  // 🔹 GUARDAR TOKEN
+  private saveToken(token: string) {
+    localStorage.setItem(this.TOKEN_KEY, token);
   }
 
-  isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+  // 🔹 CERRAR SESIÓN
+  logout() {
+    localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.USER_KEY);
+    this.userData.next(null);
+    this.authStatus.next(false); // 🔥 Notifica que el usuario cerró sesión
   }
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+
+  // 🔹 OBTENER TOKEN
+  getToken(): string | null {
+    return localStorage.getItem(this.TOKEN_KEY);
   }
+
+  // 🔹 COMPROBAR AUTENTICACIÓN (REACTIVO)
+  isAuthenticated(): Observable<boolean> {
+    return this.authStatus.asObservable();
+  }
+
+  // 🔹 VERIFICAR SI EXISTE UN TOKEN (MÉTODO PRIVADO)
+  private hasToken(): boolean {
+    return !!localStorage.getItem(this.TOKEN_KEY);
+  }
+
+  // 🔹 OBTENER DATOS DEL USUARIO
   getUserData(): Observable<any> {
     return this.userData.asObservable();
   }
 
-  loadUserFromStorage() {
-    const user = localStorage.getItem('user');
+  // 🔹 CARGAR USUARIO DESDE `localStorage`
+  private loadUserFromStorage() {
+    const user = localStorage.getItem(this.USER_KEY);
     if (user) {
       this.userData.next(JSON.parse(user));
     }
-  }
-
-  register(userData: any): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(`${this.apiUrl2}`, userData).pipe(
-      catchError((error) => {
-        console.error('Error en el registro:', error);
-        return throwError(() => new Error('Error en el registro'));
-      })
-    );
   }
 }

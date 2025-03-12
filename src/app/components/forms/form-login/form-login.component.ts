@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-login',
@@ -12,6 +14,9 @@ import { FormsModule, NgForm } from '@angular/forms';
 export class FormLoginComponent {
   identification: string = '';
   password: string = '';
+  isLoading: boolean = false;
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   @Output() datosIngresados = new EventEmitter<{
     identification: string;
@@ -23,13 +28,25 @@ export class FormLoginComponent {
       alert('Por favor, ingresa tu cédula y contraseña.');
       return;
     }
-    console.log('Datos emitidos:', {
-      identification: this.identification,
-      password: this.password,
+    this.isLoading = true;
+    this.authService.login(this.identification, this.password).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.router.navigate(['/modules']);
+      },
+      error: () => {
+        this.isLoading = false;
+        alert('Error en la autenticación:');
+      },
     });
-    this.datosIngresados.emit({
-      identification: this.identification,
-      password: this.password,
-    });
+
+    // console.log('Datos emitidos:', {
+    //   identification: this.identification,
+    //   password: this.password,
+    // });
+    // this.datosIngresados.emit({
+    //   identification: this.identification,
+    //   password: this.password,
+    // });
   }
 }

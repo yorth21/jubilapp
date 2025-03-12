@@ -13,13 +13,16 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
+  isaAuthenticated: boolean = false;
   @Input() exitRoute: string = '';
   @Input() titulo: String = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  isAuthenticated(): boolean {
-    return this.authService.isAuthenticated();
+  ngOnInit() {
+    this.authService.isAuthenticated().subscribe((authStatus) => {
+      this.isaAuthenticated = authStatus; // 🔥 Actualizar el estado de autenticación
+    });
   }
   goToPerfil() {
     this.router.navigate(['/perfil']);

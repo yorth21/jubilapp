@@ -9,11 +9,18 @@
     <input
       type="text"
       [(ngModel)]="identification"
+      #cedulaInput="ngModel"
       class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none text-black"
       name="cedula"
       placeholder="Ingresa tu cédula"
       required
     />
+    <div
+      *ngIf="cedulaInput.invalid && cedulaInput.touched"
+      class="text-red-500 text-sm"
+    >
+      La cédula es requerida
+    </div>
   </label>
 
   <label class="text-center flex flex-col w-full justify-between items-center">
@@ -32,8 +39,9 @@
 
   <button
     type="submit"
+    [disabled]="isLoading"
     class="mt-6 w-full p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
   >
-    Iniciar Sesión
+    {{ isLoading ? "Cargando..." : "Iniciar Sesión" }}
   </button>
 </form>
