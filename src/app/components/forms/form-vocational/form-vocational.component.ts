@@ -12,31 +12,30 @@ import { QuestionaryService } from '../../../services/questionary.service';
 })
 export class FormVocationalComponent implements OnInit {
   form: FormGroup;
-  cuestions: any[] = [];
+  questions: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private questionaryService: QuestionaryService
   ) {
     this.form = this.fb.group({});
   }
-  ngOnInit() {
-    this.questionaryService.cuestions$.subscribe((cuestions) => {
-      this.cuestions = cuestions;
 
-      cuestions.forEach((cuestion) => {
-        this.form.addControl(
-          cuestion.id.toString(),
-          this.fb.control(cuestion.selected)
-        );
+  ngOnInit() {
+    this.questionaryService.getQuestions().subscribe((questions) => {
+      this.questions = questions;
+
+      questions.forEach((question) => {
+        this.form.addControl(question.id.toString(), this.fb.control(null));
       });
     });
   }
+
   sendAnswers() {
     console.log(this.form.value);
   }
 
-  selectAnswer(cuestionId: number, selected: string) {
-    this.questionaryService.actualizarSeleccion(cuestionId, selected);
-    this.form.controls[cuestionId.toString()].setValue(selected);
+  selectAnswer(questionId: number, selected: string) {
+    this.form.controls[questionId.toString()].setValue(selected);
   }
 }

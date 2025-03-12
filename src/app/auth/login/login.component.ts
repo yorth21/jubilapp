@@ -13,6 +13,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Token } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
@@ -53,6 +54,7 @@ export class LoginComponent {
     const { identification, password } = this.loginForm.value;
     this.authService.login(identification, password).subscribe({
       next: () => {
+        console.log(Token);
         this.router.navigate(['/modules']); // 🚀 Redirigir después del login
       },
       error: (err) => {
