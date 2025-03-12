@@ -1,24 +1,17 @@
-<div class="bg-[var(--primary-color)] flex flex-col">
-  <div
-    *ngFor="let activity of activites()"
-    class="p-4 bg-[var(--primary-color)] rounded-lg m-2 transition min-w-32 flex flex-col items-center"
-  >
-    <h2
-      class="text-center font-bold mt-2 font-serif text-[var(--second-color)] text-3xl"
-    >
-      {{ activity.name }}
-    </h2>
-    <img
-      [src]="activity.img"
-      alt="Modulo"
-      class="w-full h-32 object-cover rounded-3xl"
-    />
-    <ul>
-      <a
-        class="hover:underline font-serif hover:bg-[var(--text2-color)] text-xl"
-        href="{{ activity.link }}"
-        >INSCRIBIRSE</a
-      >
-    </ul>
+<div class="flex justify-center gap-6 flex-wrap flex-col">
+  <div class="text-center">
+    <h1 class="text-5xl font-bold mb-4">
+      Conoce nuestras actividades de la semana
+    </h1>
+    <p class="text-xl mb-10">Inscribete en las actividades que más te gusten</p>
+  </div>
+  <div class="flex justify-center gap-6 flex-wrap">
+    <app-modulo-only
+      *ngFor="let card of cards"
+      [title]="card.title"
+      [description]="card.description"
+      [icon]="card.icon"
+      [link]="card.link"
+    ></app-modulo-only>
   </div>
 </div>
