@@ -24,6 +24,10 @@ import { ModuloOnlyComponent } from './components/component/modulo-only/modulo-o
 import { ModulosVocacionalComponent } from './components/features/moduleOrientacion/modulos-vocacional/modulos-vocacional.component';
 import { ExploracionComponent } from './components/features/moduleOrientacion/exploracion/exploracion.component';
 import { AuthGuard } from './guards/auth.guard';
+import { TableEventsComponent } from './components/component/table-events/table-events.component';
+import { TableActivitiesComponent } from './components/features/moduleOrientacion/exploracion/tables/table-activities/table-activities.component';
+import { TableCoursesComponent } from './components/features/moduleOrientacion/exploracion/tables/table-courses/table-courses.component';
+import { TableVoluntariationComponent } from './components/features/moduleOrientacion/exploracion/tables/table-voluntariation/table-voluntariation.component';
 
 export const routes: Routes = [
   {
@@ -98,6 +102,26 @@ export const routes: Routes = [
       {
         path: 'evaluaciones',
         component: ModuleTestComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'eventos',
+        component: TableEventsComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'tableactivities',
+        component: TableActivitiesComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'tablecourses',
+        component: TableCoursesComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'tablevoluntary',
+        component: TableVoluntariationComponent,
         canActivate: [AuthGuard],
       },
     ],

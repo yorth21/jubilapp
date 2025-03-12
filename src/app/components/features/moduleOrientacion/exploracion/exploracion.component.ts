@@ -1,37 +1,43 @@
 import { Component, signal } from '@angular/core';
-import { HeaderComponent } from '../../../../modules/shared/components/header/header.component';
+
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { Module } from '../../../../modules/shared/models/module';
-import { Activity } from '../../../../modules/shared/models/activity';
+
+import { ModuloOnlyComponent } from '../../../component/modulo-only/modulo-only.component';
 
 @Component({
   selector: 'app-exploracion',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ModuloOnlyComponent],
   templateUrl: './exploracion.component.html',
   styleUrl: './exploracion.component.css',
 })
 export class ExploracionComponent {
+  selectedModule: string | null = null;
   constructor(private router: Router) {}
 
-  activites = signal<Activity[]>([
+  cards = [
     {
-      name: 'ACTIVIDADES DE PASTO EN SEMANA ',
-      img: 'https://comfamiliarhuila.com/media/2025/01/programa-adulto-mayor-2.jpg',
-      link: 'https://comfamiliarhuila.com/recreacion/programa-adulto-mayor/',
+      title: 'ACTIVIDADES DE PASTO EN SEMANA',
+      description: 'Descubre las actividades que puedes realizar en Pasto.',
+      icon: 'https://images.pexels.com/photos/2402777/pexels-photo-2402777.jpeg?auto=compress&cs=tinysrgb&w=600',
+      link: '/tableactivities',
     },
     {
-      name: 'CURSOS DISPONIBLES',
-      img: 'https://www.comfamiliar.com/wp-content/uploads/2023/09/IMG_7661-1024x684.jpg',
-      link: 'https://www.comfamiliar.com/conoce-las-ultimas-novedades-de-nuestro-programa-de-gerontologia/',
+      title: 'CURSOS DISPONIBLES',
+      description:
+        'Mejora tus habilidades y conocimientos con nuestros cursos.',
+      icon: 'https://images.pexels.com/photos/5990271/pexels-photo-5990271.jpeg?auto=compress&cs=tinysrgb&w=600',
+      link: '/tablecourses',
     },
     {
-      name: 'OPORTUNIDADES DE VOLUNTARIADO',
-      img: 'https://scontent.fclo1-3.fna.fbcdn.net/v/t1.6435-9/119096039_3281889578527498_5153445949562518240_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGOnApeOkqjTPhL6HiczJNjuvxYNH09Ljm6_Fg0fT0uOYkPwPrTHS7QBDwh3DSsxoqHWoJ40cBzIKIaMDRnjurd&_nc_ohc=LueWPK5GwWcQ7kNvgEHAuXV&_nc_oc=AdhEcBmi2lYAjgWZQfVwkv5JMmRJMufo9rYIo5uIOdsOx-VuXzI8Sksx3691VTU87sQGpgdLQSiDvSSP_Y76qX5l&_nc_zt=23&_nc_ht=scontent.fclo1-3.fna&_nc_gid=AqqqgbB0JTAiF4sdpf1NTCp&oh=00_AYB5Px9S5xJ5XpBWojep3anp_XUQ-BAjG86pJy_HX8oX1g&oe=67ED16A7',
-      link: '',
+      title: 'VOLUNTARIADO',
+      description:
+        'Evalúa tus habilidades y conoce las oportunidades de voluntariado.',
+      icon: 'https://images.pexels.com/photos/28662967/pexels-photo-28662967/free-photo-of-voluntarios-plantan-arboles-en-las-dunas-de-arena-de-phan-thi-t.jpeg?auto=compress&cs=tinysrgb&w=600',
+      link: '/tablevoluntary',
     },
-  ]);
+  ];
 
   goToModule(route: string) {
     this.router.navigate([route]);

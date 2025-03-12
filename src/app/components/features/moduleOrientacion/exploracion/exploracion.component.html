@@ -1,24 +1,17 @@
-<div class="bg-[var(--primary-color)] flex flex-col">
-  <div
-    *ngFor="let activity of activites()"
-    class="p-4 bg-[var(--primary-color)] rounded-lg m-2 transition min-w-32 flex flex-col items-center"
-  >
-    <h2
-      class="text-center font-bold mt-2 font-serif text-[var(--text2-color)] text-3xl"
-    >
-      {{ activity.name }}
-    </h2>
-    <img
-      [src]="activity.img"
-      alt="Modulo"
-      class="w-full h-32 object-cover rounded-3xl"
-    />
-    <ul>
-      <a
-        class="hover:underline font-serif text-xl hover:text-[var(--text-color)]"
-        href="{{ activity.link }}"
-        >VER MAS</a
-      >
-    </ul>
+<div class="flex justify-center gap-6 flex-wrap flex-col">
+  <div class="text-center">
+    <h1 class="text-5xl font-bold mb-4">Seleccione un Apartado</h1>
+    <p class="text-xl mb-10">
+      Módulos de orientación para jubilados y pensionados
+    </p>
+  </div>
+  <div class="flex justify-center gap-6 flex-wrap">
+    <app-modulo-only
+      *ngFor="let card of cards"
+      [title]="card.title"
+      [description]="card.description"
+      [icon]="card.icon"
+      [link]="card.link"
+    ></app-modulo-only>
   </div>
 </div>
