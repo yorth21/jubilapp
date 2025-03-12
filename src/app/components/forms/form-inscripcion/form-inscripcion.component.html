@@ -1,0 +1,78 @@
+<!-- <div class="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto">
+  <h2 class="text-2xl font-bold text-center mb-4">Formulario de Inscripción</h2>
+
+  <form [formGroup]="form" (ngSubmit)="inscribirse()">
+    <div class="mb-4">
+      <label class="block font-bold">Nombre</label>
+      <input
+        type="text"
+        formControlName="nombre"
+        class="w-full p-2 border rounded"
+        disabled
+      />
+    </div>
+
+    <div class="mb-4">
+      <label class="block font-bold">Cédula</label>
+      <input
+        type="text"
+        formControlName="cedula"
+        class="w-full p-2 border rounded"
+        disabled
+      />
+    </div>
+
+    <div class="mb-4">
+      <label class="block font-bold">Oficio</label>
+      <input
+        type="text"
+        formControlName="oficio"
+        class="w-full p-2 border rounded"
+        disabled
+      />
+    </div>
+
+    <div class="mb-4">
+      <label class="block font-bold">Destrezas</label>
+      <input
+        type="text"
+        formControlName="destrezas"
+        class="w-full p-2 border rounded"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label class="block font-bold">Selecciona un evento</label>
+      <select
+        formControlName="evento"
+        (change)="actualizarResumen()"
+        class="w-full p-2 border rounded"
+      >
+        <option *ngFor="let evento of eventos" [value]="evento">
+          {{ evento }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <label class="block font-bold">Resumen</label>
+      <textarea
+        formControlName="resumen"
+        class="w-full p-2 border rounded"
+        disabled
+      ></textarea>
+    </div>
+
+    <div class="mb-4 flex items-center">
+      <input type="radio" formControlName="acepta" class="mr-2" />
+      <label>Confirmo que conozco la información del evento</label>
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-blue-500 text-white font-bold py-2 rounded-lg hover:bg-blue-700"
+    >
+      Inscribirse
+    </button>
+  </form>
+</div> -->

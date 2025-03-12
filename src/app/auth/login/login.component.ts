@@ -26,12 +26,15 @@ import { Token } from '@angular/compiler';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    IconJubilComponent,
   ],
 
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
+  fondo =
+    'https://images.pexels.com/photos/20795206/pexels-photo-20795206/free-photo-of-por-siempre.jpeg?auto=compress&cs=tinysrgb&w=600';
   loginForm: FormGroup;
   errorMessage: string | null = null;
 
