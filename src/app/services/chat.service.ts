@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 interface Post {
   id: number;
@@ -21,6 +21,7 @@ interface Comment {
 })
 export class ChatService {
   private apiUrl = 'http://localhost:4000/posts';
+  private commentsSubject = new BehaviorSubject<Comment[]>([]);
 
   constructor(private http: HttpClient) {}
 
@@ -53,19 +54,27 @@ export class ChatService {
     });
   }
   getCommentsByPostId(postId: number): Observable<Comment[]> {
-    return this.http.get<Comment[]>(
-      `http://localhost:4000/comments/post/${postId}`,
-      { headers: this.getHeaders() }
-    );
+    return this.http
+      .get<Comment[]>(`http://localhost:4000/comments/post/${postId}`, {
+        headers: this.getHeaders(),
+      })
+      .pipe(tap((comments) => this.commentsSubject.next(comments)));
   }
-  addComment(postId: number, content: string): Observable<any> {
-    return this.http.post(
-      'http://localhost:4000/comments',
-      {
-        postId: postId,
-        content: content,
-      },
-      { headers: this.getHeaders() }
-    );
+  addComment(postId: number, content: string): Observable<Comment> {
+    return this.http
+      .post<Comment>(
+        'http://localhost:4000/comments',
+        {
+          postId: postId,
+          content: content,
+        },
+        { headers: this.getHeaders() }
+      )
+      .pipe(
+        tap((newComment) => {
+          const currentComments = this.commentsSubject.value;
+          this.commentsSubject.next([...currentComments, newComment]);
+        })
+      );
   }
 }

@@ -22,19 +22,61 @@ export class FormVocationalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.questionaryService.getQuestions().subscribe((questions) => {
-      this.questions = questions;
+    this.questionaryService.getQuestions().subscribe(
+      (questions) => {
+        console.log('preguntas recibidas', questions);
+        this.questions = questions;
 
-      questions.forEach((question) => {
-        this.form.addControl(question.id.toString(), this.fb.control(null));
-      });
-    });
+        questions.forEach((question) => {
+          this.form.addControl(question.id.toString(), this.fb.control(null));
+        });
+        console.log('controles', this.form.controls);
+      },
+      (error) => {
+        console.error('❌ Error al obtener preguntas:', error);
+      }
+    );
   }
 
   sendAnswers() {
-    console.log(this.form.value);
-  }
+    const respuestas = Object.keys(this.form.value)
+      .map((questionId) => {
+        const selectedAnswerText = this.form.value[questionId];
 
+        const question = this.questions.find(
+          (q) => q.id.toString() === questionId
+        );
+        const selectedAnswer = question?.answers.find(
+          (ans: { id: number; answer: string }) =>
+            ans.answer === selectedAnswerText
+        );
+
+        return {
+          questionId: Number(questionId),
+          answerId: selectedAnswer ? selectedAnswer.id : null,
+        };
+      })
+      .filter((respuesta) => respuesta.answerId !== null);
+
+    if (respuestas.length === 0) {
+      alert('⚠️ Debes seleccionar al menos una respuesta antes de enviar.');
+      return;
+    }
+
+    this.questionaryService
+      .sendVocationalResponses({ responses: respuestas })
+      .subscribe(
+        (response) => {
+          console.log('✅ Respuestas enviadas con éxito:', response);
+          alert('¡Test enviado con éxito!');
+        },
+        (error) => {
+          console.error('❌ Error al enviar respuestas:', error);
+          console.log('📌 Detalles del error:', error.error);
+          alert(`Error: ${error.error.message || 'Solicitud incorrecta'}`);
+        }
+      );
+  }
   selectAnswer(questionId: number, selected: string) {
     this.form.controls[questionId.toString()].setValue(selected);
   }

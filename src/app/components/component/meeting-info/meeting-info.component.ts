@@ -11,7 +11,7 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './meeting-info.component.css',
 })
 export class MeetingInfoComponent implements OnInit {
-  userId!: number;
+  userIdentification!: string;
   meets: any[] = [];
 
   constructor(
@@ -21,15 +21,20 @@ export class MeetingInfoComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getUserData().subscribe((user) => {
-      if (user && user.id) {
-        this.userId = user.id;
+      if (user && user.identification) {
+        this.userIdentification = user.identification;
         this.loadMeets();
       }
     });
   }
 
   private loadMeets() {
-    this.meetService.getMeetsByUser(this.userId).subscribe(
+    if (!this.userIdentification) {
+      console.error('User identification is not defined');
+      return;
+    }
+
+    this.meetService.getMeetsByUser(this.userIdentification).subscribe(
       (data) => {
         this.meets = data;
       },
