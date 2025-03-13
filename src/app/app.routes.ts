@@ -29,6 +29,8 @@ import { TableActivitiesComponent } from './components/features/moduleOrientacio
 import { TableCoursesComponent } from './components/features/moduleOrientacion/exploracion/tables/table-courses/table-courses.component';
 import { TableVoluntariationComponent } from './components/features/moduleOrientacion/exploracion/tables/table-voluntariation/table-voluntariation.component';
 
+import { PostDetailsComponent } from './components/component/post-details/post-details.component';
+
 export const routes: Routes = [
   {
     path: '',
@@ -122,6 +124,11 @@ export const routes: Routes = [
       {
         path: 'tablevoluntary',
         component: TableVoluntariationComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'post/:id',
+        component: PostDetailsComponent,
         canActivate: [AuthGuard],
       },
     ],
