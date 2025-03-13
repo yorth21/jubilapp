@@ -22,14 +22,12 @@ export class FormMeetComponent {
     {
       id: 1,
       name: 'Dra. Ana Martínez',
-      img: 'https://images.pexels.com/photos/4098274/pexels-photo-4098274.jpeg?auto=compress&cs=tinysrgb&w=600',
     },
     {
       id: 2,
       name: 'Dr. Carlos Pérez',
-      img: 'https://images.pexels.com/photos/4100653/pexels-photo-4100653.jpeg?auto=compress&cs=tinysrgb&w=600',
     },
-    { id: 3, name: 'Dra. Laura Gómez', img: 'laura.jpg' },
+    { id: 3, name: 'Dra. Laura Gómez' },
   ];
 
   constructor(private fb: FormBuilder, private meetService: MeetService) {
@@ -37,7 +35,6 @@ export class FormMeetComponent {
       description: ['', [Validators.required, Validators.minLength(10)]],
       date: ['', Validators.required],
       doctor: ['', Validators.required],
-      time: ['', Validators.required],
     });
   }
 
@@ -46,15 +43,24 @@ export class FormMeetComponent {
       const selectedDoctor = this.doctors.find(
         (d) => d.id == this.meetForm.value.doctor
       );
-      const meet = {
-        ...this.meetForm.value,
+      const dateString = new Date(this.meetForm.value.date).toISOString();
+
+      const meetData = {
+        date: dateString,
         doctorName: selectedDoctor?.name,
-        doctorImg: selectedDoctor?.img,
-        meetLink: 'https://meet.google.com/xyz-123',
+        description: this.meetForm.value.description,
       };
 
-      this.meetService.addMeet(meet);
-      console.log('Cita guardada:', meet);
+      this.meetService.addMeet(meetData).subscribe(
+        (response) => {
+          alert('Cita agendada con éxito ');
+          this.meetForm.reset();
+        },
+        (error) => {
+          console.error('Error al agendar cita:', error);
+          alert('❌ Error al guardar la cita. Intente de nuevo.');
+        }
+      );
     } else {
       console.log('Formulario inválido');
     }

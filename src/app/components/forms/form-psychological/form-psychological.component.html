@@ -2,33 +2,35 @@
   <h2
     class="text-center text-2xl font-bold mb-4 font-serif text-[var(--text-color)]"
   >
-    TEST PSICOLOGICA
+    Cuestionario Psicologico
   </h2>
 
   <form [formGroup]="form" (ngSubmit)="sendAnswers()">
     <div
-      *ngFor="let cuestion of cuestions"
+      *ngFor="let question of questions"
       class="mb-4 p-4 bg-[var(--primary-color)] rounded-lg shadow"
     >
       <h3
         class="text-xl font-semibold mb-2 font-serif text-[var(--text-color)]"
       >
-        {{ cuestion.texto }}
+        {{ question.question }}
       </h3>
       <div class="flex flex-col">
         <label
-          *ngFor="let option of cuestion.options"
-          class="flex items-center cursor-pointer font-serif text-xl"
+          *ngFor="let answer of question.answers"
+          class="flex items-center cursor-pointer font-serif text-xl text-[var(--text-color)]"
         >
           <input
             type="radio"
-            [name]="'pregunta_' + cuestion.id"
-            [value]="option"
-            (change)="selectAnswer(cuestion.id, option)"
-            [checked]="form.controls[cuestion.id.toString()].value === option"
-            class="mr-2"
+            [name]="'pregunta_' + question.id"
+            [value]="answer.answer"
+            (change)="selectAnswer(question.id, answer.answer)"
+            [checked]="
+              form.controls[question.id.toString()].value === answer.answer
+            "
+            class="mr-2 text-[var(--text-color)]"
           />
-          {{ option }}
+          {{ answer.answer }}
         </label>
       </div>
     </div>
@@ -37,7 +39,7 @@
       type="submit"
       class="w-full bg-[var(--background-color)] text-[var(--primary-color)] font-serif font-bold py-2 rounded-lg hover:bg-[var(--text-color)] hover:text-[var(--primary-color)]"
     >
-      Finalizar Prueba
+      Enviar Respuestas
     </button>
   </form>
 </div>
