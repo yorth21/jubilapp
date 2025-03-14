@@ -11,17 +11,13 @@
   >
     <div class="flex justify-between items-center">
       <div class="flex space-x-4 justify-between">
-        <img
-          [src]="meet.doctorImg"
-          alt="Foto Doctor"
-          class="w-16 h-16 rounded-full"
-        />
         <div class="text-start">
           <h3 class="font-semibold text-lg text-gray-600">
             {{ meet.doctorName }}
           </h3>
           <p class="text-gray-600 text-sm">
-            <strong>📅 Fecha:</strong> {{ meet.date }}
+            <strong>📅 Fecha:</strong>
+            {{ meet.date | date : "dd/MM/yyyy hh:mm a" }}
           </p>
         </div>
       </div>

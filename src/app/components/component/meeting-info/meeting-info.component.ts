@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MeetService } from '../../../services/meet.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-meeting-info',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DatePipe],
   templateUrl: './meeting-info.component.html',
   styleUrl: './meeting-info.component.css',
 })
