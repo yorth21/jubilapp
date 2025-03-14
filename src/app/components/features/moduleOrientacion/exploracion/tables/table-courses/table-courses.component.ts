@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { ButtonExitComponent } from '../../../../../component/button-exit/button-exit.component';
 
 @Component({
   selector: 'app-table-courses',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonExitComponent],
   templateUrl: './table-courses.component.html',
   styleUrl: './table-courses.component.css',
 })

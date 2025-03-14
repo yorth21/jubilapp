@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Post } from '../../../modules/shared/models/post.model';
 import { AuthService } from '../../../services/auth.service';
 import Swal from 'sweetalert2';
+import { ButtonExitComponent } from '../button-exit/button-exit.component';
 interface Comment {
   id: number;
   postId: number;
@@ -18,7 +19,12 @@ interface Comment {
 @Component({
   selector: 'app-post-details',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ButtonExitComponent,
+  ],
   templateUrl: './post-details.component.html',
   styleUrl: './post-details.component.css',
 })

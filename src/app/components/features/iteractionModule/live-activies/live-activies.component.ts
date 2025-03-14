@@ -3,11 +3,12 @@ import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Activity } from '../../../../modules/shared/models/activity';
 import { ModuloOnlyComponent } from '../../../component/modulo-only/modulo-only.component';
+import { ButtonExitComponent } from '../../../component/button-exit/button-exit.component';
 
 @Component({
   selector: 'app-live-activies',
   standalone: true,
-  imports: [CommonModule, ModuloOnlyComponent],
+  imports: [CommonModule, ModuloOnlyComponent, ButtonExitComponent],
   templateUrl: './live-activies.component.html',
   styleUrl: './live-activies.component.css',
 })

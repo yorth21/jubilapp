@@ -5,9 +5,10 @@ import { AppRoutingModule } from './app.routes';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { UnauthorizedComponent } from './components/component/unauthorized/unauthorized.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [UnauthorizedComponent],
   imports: [
     BrowserModule,
     ReactiveFormsModule,

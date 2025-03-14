@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { PostComponent } from '../../../component/post/post.component';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { ButtonExitComponent } from '../../../component/button-exit/button-exit.component';
 
 @Component({
   selector: 'app-forums',
   standalone: true,
-  imports: [CommonModule, FormsModule, PostComponent],
+  imports: [CommonModule, FormsModule, PostComponent, ButtonExitComponent],
   templateUrl: './forums.component.html',
   styleUrl: './forums.component.css',
 })

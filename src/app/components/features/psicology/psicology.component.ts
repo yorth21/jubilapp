@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormMeetComponent } from '../../forms/form-meet/form-meet.component';
 import { CommonModule } from '@angular/common';
 import { MeetingInfoComponent } from '../../component/meeting-info/meeting-info.component';
+import { ButtonExitComponent } from '../../component/button-exit/button-exit.component';
 
 @Component({
   selector: 'app-psicology',
@@ -11,6 +12,7 @@ import { MeetingInfoComponent } from '../../component/meeting-info/meeting-info.
     CommonModule,
     MeetingInfoComponent,
     FormMeetComponent,
+    ButtonExitComponent,
   ],
   templateUrl: './psicology.component.html',
   styleUrl: './psicology.component.css',

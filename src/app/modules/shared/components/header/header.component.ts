@@ -4,11 +4,12 @@ import { MiPerfilComponent } from '../../../../components/component/mi-perfil/mi
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { ButtonExitComponent } from '../../../../components/component/button-exit/button-exit.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [IconJubilComponent, MiPerfilComponent, CommonModule],
+  imports: [MiPerfilComponent, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -20,8 +21,8 @@ export class HeaderComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.authService.isAuthenticated().subscribe((authStatus) => {
-      this.isaAuthenticated = authStatus; // 🔥 Actualizar el estado de autenticación
+    this.authService.isAuthenticated().subscribe((authStatus: boolean) => {
+      this.isaAuthenticated = authStatus;
     });
   }
   goToPerfil() {

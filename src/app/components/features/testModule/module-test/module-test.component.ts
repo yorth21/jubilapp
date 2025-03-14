@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Module } from '../../../../modules/shared/models/module';
 import { ModuloOnlyComponent } from '../../../component/modulo-only/modulo-only.component';
+import { ButtonExitComponent } from '../../../component/button-exit/button-exit.component';
 
 @Component({
   selector: 'app-module-test',
   standalone: true,
-  imports: [CommonModule, ModuloOnlyComponent],
+  imports: [CommonModule, ModuloOnlyComponent, ButtonExitComponent],
   templateUrl: './module-test.component.html',
   styleUrl: './module-test.component.css',
 })

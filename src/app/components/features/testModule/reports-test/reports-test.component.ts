@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { QuestionaryService } from '../../../../services/questionary.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../services/auth.service';
+import { ButtonExitComponent } from '../../../component/button-exit/button-exit.component';
 
 @Component({
   selector: 'app-reports-test',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonExitComponent],
   templateUrl: './reports-test.component.html',
   styleUrl: './reports-test.component.css',
 })

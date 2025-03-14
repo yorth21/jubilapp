@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { Module } from '../../../../modules/shared/models/module';
 import { CommonModule } from '@angular/common';
 import { ModuloOnlyComponent } from '../../../component/modulo-only/modulo-only.component';
+import { ButtonExitComponent } from '../../../component/button-exit/button-exit.component';
 
 @Component({
   selector: 'app-module-iteractions',
   standalone: true,
-  imports: [CommonModule, ModuloOnlyComponent],
+  imports: [CommonModule, ModuloOnlyComponent, ButtonExitComponent],
   templateUrl: './module-iteractions.component.html',
   styleUrl: './module-iteractions.component.css',
 })

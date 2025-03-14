@@ -3,11 +3,12 @@ import { Router } from '@angular/router';
 import { Activity } from '../../../../modules/shared/models/activity';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../services/auth.service';
+import { ButtonExitComponent } from '../../../component/button-exit/button-exit.component';
 
 @Component({
   selector: 'app-recommended-activities',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonExitComponent],
   templateUrl: './recommended-activities.component.html',
   styleUrl: './recommended-activities.component.css',
 })

@@ -30,8 +30,7 @@ import { TableCoursesComponent } from './components/features/moduleOrientacion/e
 import { TableVoluntariationComponent } from './components/features/moduleOrientacion/exploracion/tables/table-voluntariation/table-voluntariation.component';
 
 import { PostDetailsComponent } from './components/component/post-details/post-details.component';
-
-import { AdminPruebaComponent } from './auth/components/admin-prueba/admin-prueba.component';
+import { UnauthorizedComponent } from './components/component/unauthorized/unauthorized.component';
 
 export const routes: Routes = [
   {
@@ -136,8 +135,13 @@ export const routes: Routes = [
       {
         path: 'admin',
         component: PruebaComponent,
+        canActivate: [AuthGuard],
       },
     ],
+  },
+  {
+    path: 'unauthorized',
+    component: UnauthorizedComponent,
   },
 
   {

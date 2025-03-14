@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 import { ModuloOnlyComponent } from '../../../component/modulo-only/modulo-only.component';
+import { ButtonExitComponent } from '../../../component/button-exit/button-exit.component';
 
 @Component({
   selector: 'app-exploracion',
   standalone: true,
-  imports: [CommonModule, ModuloOnlyComponent],
+  imports: [CommonModule, ModuloOnlyComponent, ButtonExitComponent],
   templateUrl: './exploracion.component.html',
   styleUrl: './exploracion.component.css',
 })

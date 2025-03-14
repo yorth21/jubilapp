@@ -3,11 +3,12 @@ import { Module } from '../../../../modules/shared/models/module';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ModuloOnlyComponent } from '../../../component/modulo-only/modulo-only.component';
+import { ButtonExitComponent } from '../../../component/button-exit/button-exit.component';
 
 @Component({
   selector: 'app-modulos-vocacional',
   standalone: true,
-  imports: [CommonModule, ModuloOnlyComponent],
+  imports: [CommonModule, ModuloOnlyComponent, ButtonExitComponent],
   templateUrl: './modulos-vocacional.component.html',
   styleUrl: './modulos-vocacional.component.css',
 })

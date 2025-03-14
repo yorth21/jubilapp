@@ -36,7 +36,7 @@ export class AuthService {
   private BASE_URL = 'http://localhost:4000'; // URL base de la API
   private TOKEN_KEY = 'token';
   private USER_KEY = 'user';
-
+  private userCedula: string | null = null;
   private userData = new BehaviorSubject<any>(null);
   private authStatus = new BehaviorSubject<boolean>(this.hasToken());
 
@@ -57,6 +57,10 @@ export class AuthService {
             this.saveToken(response.accessToken);
             this.saveUser(response.user);
             this.authStatus.next(true); // 🔥 Notifica que el usuario está autenticado
+            if (identification === '1231231231') {
+              this.authStatus.next(true);
+              this.userCedula = identification;
+            }
           }
         }),
         catchError((error) => {
@@ -106,6 +110,17 @@ export class AuthService {
   // 🔹 COMPROBAR AUTENTICACIÓN (REACTIVO)
   isAuthenticated(): Observable<boolean> {
     return this.authStatus.asObservable();
+  }
+  getUserCedula(): string | null {
+    return this.userCedula;
+  }
+
+  getUser() {
+    return JSON.parse(localStorage.getItem('user') || 'null');
+  }
+  isAdmin(): boolean {
+    const user = this.getUser();
+    return user.cedula === '1231231231';
   }
 
   // 🔹 VERIFICAR SI EXISTE UN TOKEN (MÉTODO PRIVADO)
