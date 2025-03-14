@@ -4,6 +4,7 @@ import { ChatService } from '../../../../services/chat.service';
 import { FormsModule } from '@angular/forms';
 import { PostComponent } from '../../../component/post/post.component';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-forums',
@@ -38,19 +39,23 @@ export class ForumsComponent implements OnInit {
   }
 
   agregarPost(nuevoPost: { title: string; content: string }) {
-    const userId = this.obtenerUserId(); // 🔹 Asegúrate de obtener el userId
+    const userId = this.obtenerUserId();
     this.postService.addPost({ ...nuevoPost, userId }).subscribe(
       (postConId) => {
         this.posts.unshift(postConId);
       },
       (error) => {
+        Swal.fire({
+          title: 'Es una pena!',
+          text: 'Error al agregar post',
+          backdrop: `rgba(0,0,123,0.4)`,
+        });
         console.error('Error al agregar post:', error);
       }
     );
   }
   obtenerUserId(): number {
-    // Aquí puedes obtener el ID del usuario desde un servicio de autenticación
-    return 1; // 🔹 Temporalmente usa un valor fijo
+    return 1;
   }
 
   goToPsot(id: number) {

@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MeetService } from '../../../services/meet.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-meet',
@@ -27,7 +28,10 @@ export class FormMeetComponent {
       id: 2,
       name: 'Dr. Carlos Pérez',
     },
-    { id: 3, name: 'Dra. Laura Gómez' },
+    {
+      id: 3,
+      name: 'Dra. Laura Gómez',
+    },
   ];
 
   constructor(private fb: FormBuilder, private meetService: MeetService) {
@@ -53,12 +57,19 @@ export class FormMeetComponent {
 
       this.meetService.addMeet(meetData).subscribe(
         (response) => {
-          alert('Cita agendada con éxito ');
+          Swal.fire({
+            icon: 'success',
+            text: 'Cita agendada con éxito',
+          });
+
           this.meetForm.reset();
         },
         (error) => {
           console.error('Error al agendar cita:', error);
-          alert('❌ Error al guardar la cita. Intente de nuevo.');
+          Swal.fire({
+            icon: 'error',
+            text: 'Error al guardar la cita. Intente de nuevo.',
+          });
         }
       );
     } else {

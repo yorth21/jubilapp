@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { QuestionaryService } from '../../../../services/questionary.service';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-reports-test',
@@ -10,24 +11,36 @@ import { CommonModule } from '@angular/common';
   styleUrl: './reports-test.component.css',
 })
 export class ReportsTestComponent {
+  user: any = {};
   results: any = null;
 
-  constructor(private questionaryService: QuestionaryService) {}
+  constructor(
+    private vocationalService: QuestionaryService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
-    const identificacion =
-      localStorage.getItem('identificacion') || '1231231231';
+    this.authService.getUserData().subscribe((userData) => {
+      if (userData) {
+        this.user = userData;
 
-    this.questionaryService
-      .getVocationalResponsesByUser(identificacion)
-      .subscribe(
-        (data) => {
-          this.results = data || [];
-        },
-        (error) => {
-          console.error('❌ Error al obtener respuestas:', error);
-          this.results = [];
+        // 📌 Si la identificación está disponible, hacer la llamada a la API
+        if (this.user.identification) {
+          this.getVocationalResponses(this.user.identification);
         }
-      );
+      }
+    });
+  }
+
+  getVocationalResponses(identification: string) {
+    this.vocationalService.getByUser(identification).subscribe(
+      (response) => {
+        this.results = response;
+        console.log('✅ Datos vocacionales:', this.results);
+      },
+      (error) => {
+        console.error('❌ Error obteniendo los datos vocacionales:', error);
+      }
+    );
   }
 }

@@ -6,16 +6,13 @@
 </div>
 <div class="max-h-[500px] overflow-y-auto scrollbar-hidden">
   <div
-    *ngFor="let meet of meets"
+    *ngFor="let meet of meets; let i = index"
     class="p-4 rounded-lg shadow-md mb-4 w-full flex flex-col justify-between bg-[var(--primary-color)] overflow-y-auto"
   >
     <div class="flex justify-between items-center">
       <div class="flex space-x-4 justify-between">
         <img
-          [src]="
-            'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=600' +
-            meet.doctorImg
-          "
+          [src]="meet.doctorImg"
           alt="Foto Doctor"
           class="w-16 h-16 rounded-full"
         />
@@ -39,5 +36,11 @@
       </div>
     </div>
     <p class="text-gray-700 mt-2">Motivo: {{ meet.description }}</p>
+    <button
+      (click)="confirmDelete(meet.id, i)"
+      class="bg-red-500 text-white px-4 py-2 rounded mt-3 hover:bg-red-600"
+    >
+      ❌ Cancelar Cita
+    </button>
   </div>
 </div>

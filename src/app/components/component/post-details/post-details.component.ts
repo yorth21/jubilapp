@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChatService } from '../../../services/chat.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Post } from '../../../modules/shared/models/post.model';
 import { AuthService } from '../../../services/auth.service';
+import Swal from 'sweetalert2';
 interface Comment {
   id: number;
   postId: number;
@@ -81,33 +82,79 @@ export class PostDetailsComponent implements OnInit {
       (error) => console.error('Error al agregar comentario:', error)
     );
   }
-  deleteComment(commentId: number, userId: number) {
-    if (userId !== this.currentUserId) return; // Evitar eliminación si no es el dueño del comentario
-    if (!confirm('¿Seguro que deseas eliminar este comentario?')) return;
 
-    this.postService.deleteComment(commentId).subscribe(
-      () => {
-        this.comments = this.comments.filter(
-          (comment) => comment.id !== commentId
+  deleteComment(commentId: number, userId: number) {
+    if (userId !== this.currentUserId) return;
+
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás revertir esta acción.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.postService.deleteComment(commentId).subscribe(
+          () => {
+            this.comments = this.comments.filter(
+              (comment) => comment.id !== commentId
+            );
+            Swal.fire(
+              'Eliminado',
+              'El comentario ha sido eliminado.',
+              'success'
+            );
+          },
+          (error) => {
+            console.error('Error al eliminar comentario:', error);
+            Swal.fire('Error', 'No se pudo eliminar el comentario.', 'error');
+          }
         );
-        console.log('Comentario eliminado');
-      },
-      (error) => console.error('Error al eliminar comentario:', error)
-    );
+      }
+    });
   }
 
   deletePost(postId: number) {
-    if (!this.post || this.post.userId !== this.currentUserId) return; // Verificar si el usuario puede eliminar
-    if (!confirm('¿Seguro que deseas eliminar este post?')) return;
+    if (!this.post || this.post.userId !== this.currentUserId) return;
 
-    this.postService.deletePost(postId).subscribe(
-      () => {
-        console.log('Post eliminado');
-        this.post = null;
-        this.comments = [];
-        this.router.navigate(['/foros']);
-      },
-      (error) => console.error('Error al eliminar el post:', error)
-    );
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción no se puede deshacer',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.postService.deletePost(postId).subscribe(
+          () => {
+            Swal.fire({
+              title: '¡Eliminado!',
+              text: 'El post ha sido eliminado con éxito.',
+              icon: 'success',
+              confirmButtonColor: '#3085d6',
+            });
+
+            this.post = null;
+            this.comments = [];
+            this.router.navigate(['/foros']);
+          },
+          (error) => {
+            Swal.fire({
+              title: 'Error',
+              text: 'Ocurrió un error al eliminar el post',
+              icon: 'error',
+              confirmButtonColor: '#d33',
+            });
+            console.error('Error al eliminar post:', error);
+          }
+        );
+      }
+    });
   }
 }

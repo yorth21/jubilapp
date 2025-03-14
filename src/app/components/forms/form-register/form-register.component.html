@@ -1,13 +1,12 @@
 <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="w-ful">
   <div class="grid grid-cols-3 gap-2 h-64 my-3 w-full">
     <label class="flex text-center flex-col items-center">
-      <span class="text-[var(--text-color)] font-semibold font-serif"
-        >Nombre</span
-      >
+      <span class="text-[var(--text-color)] font-semibold">Nombre</span>
       <input
+        maxlength="30"
         type="text"
         formControlName="names"
-        placeholder="Ingrese su Nombre"
+        placeholder="Nombre"
         class="input-field text-[var(--text-color)] border rounded-md p-2"
       />
       <div class="error-container">
@@ -21,13 +20,12 @@
     </label>
 
     <label class="flex text-center flex-col items-center">
-      <span class="text-[var(--text-color)] font-semibold font-serif"
-        >Apellidos</span
-      >
+      <span class="text-[var(--text-color)] font-semibold">Apellidos</span>
       <input
+        maxlength="30"
         type="text"
         formControlName="lastNames"
-        placeholder="Ingrese sus Apellidos"
+        placeholder="Apellidos"
         class="input-field text-[var(--text-color)] border rounded-md p-2"
       />
       <div class="error-container">
@@ -41,13 +39,12 @@
     </label>
 
     <label class="flex text-center flex-col items-center">
-      <span class="text-[var(--text-color)] font-semibold font-serif"
-        >Cédula</span
-      >
+      <span class="text-[var(--text-color)] font-semibold">Cédula</span>
       <input
         type="text"
+        maxlength="10"
         formControlName="identification"
-        placeholder="Ingrese su Documento"
+        placeholder="No Documento"
         class="input-field text-[var(--text-color)] border rounded-md p-2"
       />
       <div class="error-container">
@@ -61,13 +58,13 @@
     </label>
 
     <label class="flex text-center flex-col items-center">
-      <span class="text-[var(--text-color)] font-semibold font-serif"
+      <span class="text-[var(--text-color)] font-semibold"
         >Correo Electrónico</span
       >
       <input
         type="email"
         formControlName="email"
-        placeholder="Ingrese su Email"
+        placeholder="email@gmail.com"
         class="input-field text-[var(--text-color)] border rounded-md p-2"
       />
       <div class="error-container">
@@ -81,22 +78,19 @@
     </label>
 
     <label class="flex text-center flex-col items-center">
-      <span class="text-[var(--text-color)] font-semibold font-serif"
-        >Dirección</span
-      >
+      <span class="text-[var(--text-color)] font-semibold">Dirección</span>
       <input
         type="text"
         formControlName="address"
-        placeholder="Ingrese su Dirección"
+        placeholder="cll-#-#"
         class="input-field text-[var(--text-color)] border rounded-md p-2"
       />
     </label>
 
     <label class="flex text-center flex-col items-center">
-      <span class="text-[var(--text-color)] font-semibold font-serif"
-        >Teléfono</span
-      >
+      <span class="text-[var(--text-color)] font-semibold">Teléfono</span>
       <input
+        maxlength="10"
         type="tel"
         formControlName="phone"
         placeholder="Ingrese su Teléfono"
@@ -107,16 +101,15 @@
           *ngIf="f['phone'].invalid && f['phone'].touched"
           class="error-message"
         >
-          Teléfono debe ser de 10 dígitos numéricos.
+          10 dígitos numéricos.
         </div>
       </div>
     </label>
 
     <label class="flex text-center flex-col items-center">
-      <span class="text-[var(--text-color)] font-semibold font-serif"
-        >Contraseña</span
-      >
+      <span class="text-[var(--text-color)] font-semibold">Contraseña</span>
       <input
+        minlength="6"
         type="password"
         formControlName="password"
         placeholder="Ingrese su Contraseña"
@@ -127,13 +120,13 @@
           *ngIf="f['password'].invalid && f['password'].touched"
           class="error-message"
         >
-          La contraseña debe tener al menos 6 caracteres.
+          Al menos 6 caracteres.
         </div>
       </div>
     </label>
 
     <label class="flex text-center flex-col items-center">
-      <span class="text-[var(--text-color)] font-semibold font-serif"
+      <span class="text-[var(--text-color)] font-semibold"
         >Fecha de Nacimiento</span
       >
       <input
@@ -144,9 +137,7 @@
     </label>
 
     <label class="flex text-center flex-col items-center">
-      <span class="text-[var(--text-color)] font-semibold font-serif"
-        >Sexo</span
-      >
+      <span class="text-[var(--text-color)] font-semibold">Sexo</span>
       <input
         type="text"
         formControlName="gender"
@@ -156,9 +147,7 @@
     </label>
 
     <label class="flex text-center flex-col items-center">
-      <span class="text-[var(--text-color)] font-semibold font-serif"
-        >Profesión</span
-      >
+      <span class="text-[var(--text-color)] font-semibold">Profesión</span>
       <input
         type="text"
         formControlName="job"
@@ -168,7 +157,7 @@
     </label>
   </div>
 
-  <div class="flex flex-col items-center mt-28">
+  <div class="flex flex-col items-center mt-20">
     <button
       type="submit"
       class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300"

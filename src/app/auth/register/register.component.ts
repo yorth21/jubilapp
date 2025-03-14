@@ -6,6 +6,7 @@ import { H1HeaderComponent } from '../../components/component/h1-header/h1-heade
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -26,13 +27,24 @@ export class RegisterComponent {
   recibirDatosRegistro(datos: any) {
     this.authService.register(datos).subscribe({
       next: (response) => {
-        console.log('Registro exitoso', response);
-
+        Swal.fire({
+          icon: 'success',
+          title: 'Registro exitoso',
+          text: 'Redirigiendo...',
+          timer: 2000,
+          showConfirmButton: false,
+        });
         this.router.navigate(['/login']);
       },
       error: (error) => {
+        Swal.fire({
+          heightAuto: true,
+          icon: 'error',
+          title: 'Error',
+          text: 'Error en el registro',
+          backdrop: `rgba(0,0,123,0.4)`,
+        });
         console.error('Error en el registro', error);
-        alert('Hubo un error en el registro. Inténtalo de nuevo.');
       },
     });
   }

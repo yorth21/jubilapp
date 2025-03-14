@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { QuestionaryService } from '../../../services/questionary.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-vocational',
@@ -59,8 +60,12 @@ export class FormVocationalComponent implements OnInit {
       .filter((respuesta) => respuesta.answerId !== null);
 
     if (respuestas.length === 0) {
-      alert('⚠️ Debes seleccionar al menos una respuesta antes de enviar.');
-      return;
+      Swal.fire({
+        title: 'Alert',
+        icon: 'warning',
+        backdrop: `rgba(0,0,123,0.4)`,
+        text: '⚠️   Debes seleccionar al menos una respuesta antes de enviar.',
+      });
     }
 
     this.questionaryService
@@ -68,12 +73,16 @@ export class FormVocationalComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log('✅ Respuestas enviadas con éxito:', response);
-          alert('¡Test enviado con éxito!');
+          Swal.fire({
+            title: 'Confirmacion',
+            icon: 'success',
+            text: '¡Test enviado con éxito!',
+            backdrop: `rgba(0,0,123,0.4)`,
+          });
         },
         (error) => {
           console.error('❌ Error al enviar respuestas:', error);
           console.log('📌 Detalles del error:', error.error);
-          alert(`Error: ${error.error.message || 'Solicitud incorrecta'}`);
         }
       );
   }

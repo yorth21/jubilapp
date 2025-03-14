@@ -35,7 +35,7 @@ interface Cuestion {
 })
 export class QuestionaryService {
   private apiUrl = 'http://localhost:4000/vocational-questions';
-  private apiUrl2 = 'http://localhost:4000/vocational-responses/by-user';
+  private apiUrl2 = 'http://localhost:4000/vocational-responses/by-user/';
 
   constructor(private http: HttpClient) {}
 
@@ -55,16 +55,24 @@ export class QuestionaryService {
     });
     return this.http.get<any[]>(this.apiUrl, { headers });
   }
+
   getUserResponses(identification: string): Observable<VocationalResponse[]> {
+    if (!identification) {
+      console.error('El ID del usuario es inválido.');
+      return new Observable<VocationalResponse[]>((observer) => {
+        observer.error('ID de usuario inválido');
+      });
+    }
+
     return this.http.get<VocationalResponse[]>(
       `${this.apiUrl2}/${identification}`,
-      {
-        headers: this.getHeaders(),
-      }
+      { headers: this.getHeaders() }
     );
   }
+
   getVocationalResponsesByUser(identificacion: string): Observable<any[]> {
     const token = localStorage.getItem('token');
+
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -87,5 +95,14 @@ export class QuestionaryService {
       data,
       { headers }
     );
+  }
+  getByUser(identification: string): Observable<any> {
+    console.log('aqui esta', identification);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    });
+    return this.http.get<any>(`${this.apiUrl2}${identification}`, { headers });
   }
 }

@@ -47,4 +47,10 @@ export class MeetService {
       () => new Error('Something bad happened; please try again later.')
     );
   }
+  deleteMeet(meetId: number): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http
+      .delete(`${this.apiUrl}/${meetId}`, { headers })
+      .pipe(catchError(this.handleError));
+  }
 }

@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import { H1HeaderComponent } from '../../components/component/h1-header/h1-header.component';
 import { IconJubilComponent } from '../../components/component/icon-jubil/icon-jubil.component';
-import { FormLoginComponent } from '../../components/forms/form-login/form-login.component';
-import { FooterComponent } from '../../modules/shared/components/footer/footer.component';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -14,22 +11,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { Token } from '@angular/compiler';
-import { AlertComponent } from '../../components/component/alert/alert.component';
+
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    // H1HeaderComponent,
-    // IconJubilComponent,
-    // FormLoginComponent,
-    // FooterComponent,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    IconJubilComponent,
-    AlertComponent,
-  ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, IconJubilComponent],
 
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
@@ -56,34 +44,44 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.invalid) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Advertencia',
+        text: 'Por favor, complete el formulario',
+        backdrop: `rgba(0,0,123,0.4)`,
+      });
       return;
     }
-
     const { identification, password } = this.loginForm.value;
     this.authService.login(identification, password).subscribe({
       next: () => {
+        console.log(
+          '🚀 Login exitoso, usuario identificado:',
+          localStorage.getItem('identificacion')
+        );
         console.log(Token);
-        this.showAlertMessage('Ingreso exitoso', 'success');
+        Swal.fire({
+          icon: 'success',
+          title: 'Ingreso exitoso',
+          text: 'Redirigiendo...',
+          timer: 2000,
+          showConfirmButton: false,
+        });
         setTimeout(() => {
           this.router.navigate(['/modules']);
         }, 2000);
       },
       error: (err) => {
-        this.showAlertMessage('Contraseña incorrecta', 'error');
-        this.errorMessage = 'Usuario o contraseña incorrectos';
+        Swal.fire({
+          heightAuto: true,
+          icon: 'error',
+          title: 'Error',
+          text: 'Usuario o contraseña incorrectos',
+          backdrop: `rgba(0,0,123,0.4)`,
+        });
+
         console.error('Error en login:', err);
       },
     });
-  }
-  showAlertMessage(
-    message: string,
-    type: 'success' | 'error' | 'warning' | 'info'
-  ) {
-    this.alertMessage = message;
-    this.alertType = type;
-    this.showAlert = true;
-    setTimeout(() => {
-      this.showAlert = false;
-    }, 3000);
   }
 }
