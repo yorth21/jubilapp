@@ -2,7 +2,7 @@
   min-height: 20px;
 }
 .error-message {
-  color: red;
+  color: blueviolet;
   font-size: 14px;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;

@@ -30,6 +30,7 @@ import { TableCoursesComponent } from './components/features/moduleOrientacion/e
 import { TableVoluntariationComponent } from './components/features/moduleOrientacion/exploracion/tables/table-voluntariation/table-voluntariation.component';
 
 import { PostDetailsComponent } from './components/component/post-details/post-details.component';
+import { AdminComponent } from './auth/components/admin/admin.component';
 
 export const routes: Routes = [
   {
@@ -160,6 +161,10 @@ export const routes: Routes = [
   {
     path: '**', // Ruta comodín para manejar rutas no encontradas
     redirectTo: 'home',
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
   },
 ];
 

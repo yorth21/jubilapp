@@ -1,12 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { Post } from '../modules/shared/models/post.model';
 
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-}
 interface Comment {
   id: number;
   postId: number;
@@ -21,6 +21,7 @@ interface Comment {
 })
 export class ChatService {
   private apiUrl = 'http://localhost:4000/posts';
+
   private commentsSubject = new BehaviorSubject<Comment[]>([]);
 
   constructor(private http: HttpClient) {}
@@ -43,11 +44,12 @@ export class ChatService {
       headers: this.getHeaders(),
     });
   }
-  deletePost(id: number): Observable<Post> {
-    return this.http.delete<Post>(`${this.apiUrl}/${id}`, {
+  deletePost(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, {
       headers: this.getHeaders(),
     });
   }
+
   getPost(id: number): Observable<Post> {
     return this.http.get<Post>(`${this.apiUrl}/${id}`, {
       headers: this.getHeaders(),
@@ -76,5 +78,12 @@ export class ChatService {
           this.commentsSubject.next([...currentComments, newComment]);
         })
       );
+  }
+  deleteComment(commentId: number): Observable<any> {
+    const httpOptions = { headers: this.getHeaders() };
+    return this.http.delete(
+      `http://localhost:4000/comments/${commentId}`,
+      httpOptions
+    );
   }
 }

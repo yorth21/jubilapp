@@ -125,4 +125,8 @@ export class AuthService {
       this.userData.next(JSON.parse(user));
     }
   }
+  getUserId(): number | null {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user?.id || null;
+  }
 }

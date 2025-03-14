@@ -1,31 +1,17 @@
-<!-- <div
-  class="w-full flex flex-col items-center justify-center min-h-screen bg-[var(--background-color)] rounded-md"
->
-  <div
-    class="p-12 m-6 rounded-lg shadow-lg min-w-96 flex flex-col items-center bg-[var(--primary-color)]"
-  >
-    <div class="p-5">
-      <app-h1-header></app-h1-header>
-    </div>
-    <div class="p-5 w-60 h-52">
-      <app-icon-jubil></app-icon-jubil>
-    </div>
-    <div class="p-8">
-      <app-form-login
-        (datosIngresados)="recibirDatosFormulario($event)"
-      ></app-form-login>
-    </div>
-    <div class="">
-      <app-footer></app-footer>
-    </div>
-  </div>
-</div> -->
+<div>
+  <app-alert
+    *ngIf="showAlert"
+    [message]="alertMessage"
+    [type]="alertType"
+  ></app-alert>
+</div>
+
 <div class="flex bg-red-600 min-h-screen justify-between">
   <div class="bg-violet-700 min-h-full text-center w-full">
     <img src="{{ fondo }}" alt="FONDO" />
   </div>
   <div
-    class="login-container min-h-full bg-yellow-400 justify-end w-1/3 items-center"
+    class="login-container p-9 min-h-full min-w-80 bg-yellow-400 justify-end w-1/3 items-center"
   >
     <app-icon-jubil class="w-32"></app-icon-jubil>
     <h2 class="text-[var(--text-color)] text-center font-bold text-4xl p-12">
@@ -34,14 +20,16 @@
 
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <div>
-        <label class="text-[--text-color]" for="identification"
+        <label class="text-[--text-color] font-semibold" for="identification"
           >Identificación</label
         >
         <input
+          placeholder="Ingresa identificación"
           class="text-black"
           type="text"
           id="identification"
           formControlName="identification"
+          maxlength="10"
         />
         <small
           class="text-red-400"
@@ -55,15 +43,18 @@
       </div>
 
       <div>
-        <label for="password">Contraseña</label>
+        <label class="text-[var(--text-color)] font-semibold" for="password"
+          >Contraseña</label
+        >
         <input
+          placeholder="Ingresa Contraseña"
           class="text-black"
           type="password"
           id="password"
           formControlName="password"
         />
         <small
-          class="text-red-400"
+          class="text-red-400 p-0"
           *ngIf="
             loginForm.controls['password'].invalid &&
             loginForm.controls['password'].touched

@@ -4,13 +4,12 @@
 >
   <label class="text-center flex flex-col justify-between items-center w-full">
     <span class="text-[var(--text-color)] font-semibold font-serif text-lg">
-      CÉDULA
     </span>
     <input
       type="text"
       [(ngModel)]="identification"
       #cedulaInput="ngModel"
-      class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none text-black"
+      class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 outline-none text-[var(--text-color)]"
       name="cedula"
       placeholder="Ingresa tu cédula"
       required

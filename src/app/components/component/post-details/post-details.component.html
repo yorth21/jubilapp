@@ -1,21 +1,34 @@
 <div *ngIf="post" class="bg-white p-4 shadow rounded-lg border">
-  <div class="bg-[var(--text2-color)] p-4 rounded-lg">
-    <h2 class="text-xl font-semibold text-[var(--primary-color)]">
-      {{ post.title }}
-    </h2>
-    <p class="text-white">{{ post.content }}</p>
-  </div>
+  <div class="bg-[var(--text2-color)] p-4 rounded-lg flex justify-between">
+    <div>
+      <p class="text-orange-500">
+        <span>{{ "@" }}</span
+        >{{ post.userNames }}
+      </p>
+      <h2 class="text-xl font-semibold text-[var(--primary-color)]">
+        {{ post.title }}
+      </h2>
+      <p class="text-white">{{ post.content }}</p>
+    </div>
 
-  <div class="flex justify-end mt-2">
-    <button
-      class="px-2 py-1 bg-red-500 text-white font-bold rounded-lg shadow-lg hover:bg-red-600 transition"
-    >
-      🗑️
-    </button>
+    <div class="flex justify-end mt-2 items-center">
+      <button
+        *ngIf="post?.userId === currentUserId"
+        (click)="deletePost(post.id)"
+        class="px-2 py-2 bg-red-500 text-white font-bold rounded-lg shadow-lg hover:bg-red-600 transition"
+      >
+        🗑️
+      </button>
+    </div>
   </div>
+  <button
+    (click)="togglePostForm()"
+    class="bg-gray-900 bg-opacity-30 text-[var(--text-color)] font-bold rounded-lg shadow-lg hover:bg-slate-500 transition text-sm"
+  >
+    {{ mostrarPostForm ? "Ocultar" : "Comentar" }}
+  </button>
 
-  <div class="mt-4">
-    <h3 class="text-lg font-semibold">Add a comment:</h3>
+  <div class="mt-4" *ngIf="mostrarPostForm">
     <textarea
       [(ngModel)]="newComment"
       class="w-full p-2 border rounded-md text-black"
@@ -24,26 +37,41 @@
     ></textarea>
     <button
       (click)="addComments()"
-      class="mt-2 px-4 py-2 bg-blue-500 text-white font-bold rounded-lg shadow-lg hover:bg-blue-600 transition"
+      class="mt-2 px-4 py-2 bg-[var(--text-color)] text-white font-bold rounded-lg shadow-lg hover:bg-blue-950 transition text-xs"
     >
       ➕ Add Comment
     </button>
   </div>
-  s
 
   <div class="mt-4">
-    <h3 class="text-lg font-bold">Comentarios:</h3>
+    <h3 class="text-lg font-bold text-black">Comentarios:</h3>
     <div *ngIf="comments.length > 0; else noComments">
       <div
         *ngFor="let comment of comments"
-        class="bg-gray-100 p-3 mt-2 rounded-lg"
+        class="bg-gray-100 p-3 mt-2 rounded-lg flex justify-between"
       >
-        <p class="text-gray-800">
-          <strong>{{ comment.userNames }}:</strong> {{ comment.content }}
-        </p>
-        <small class="text-gray-600">{{
-          comment.createdAt | date : "short"
-        }}</small>
+        <div>
+          <p class="text-gray-800">
+            <strong
+              ><span>{{ "@" }}</span
+              >{{ comment.userNames }}:</strong
+            >
+            {{ comment.content }}
+          </p>
+          <small class="text-gray-600">{{
+            comment.createdAt | date : "short"
+          }}</small>
+        </div>
+
+        <div class="flex items-end">
+          <button
+            class="text-red-500"
+            *ngIf="comment.userId === currentUserId"
+            (click)="deleteComment(comment.id, comment.userId)"
+          >
+            Eliminar Comentario
+          </button>
+        </div>
       </div>
     </div>
     <ng-template #noComments>

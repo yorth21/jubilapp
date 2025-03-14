@@ -22,13 +22,20 @@ export class FormPsychologicalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.questionaryService.getQuestions().subscribe((questions) => {
-      this.questions = questions;
+    this.questionaryService.getQuestions().subscribe(
+      (questions) => {
+        console.log('preguntas recibidas', questions);
+        this.questions = questions;
 
-      questions.forEach((question) => {
-        this.form.addControl(question.id.toString(), this.fb.control(null));
-      });
-    });
+        questions.forEach((question) => {
+          this.form.addControl(question.id.toString(), this.fb.control(null));
+        });
+        console.log('controles', this.form.controls);
+      },
+      (error) => {
+        console.error('❌ Error al obtener preguntas:', error);
+      }
+    );
   }
 
   sendAnswers() {

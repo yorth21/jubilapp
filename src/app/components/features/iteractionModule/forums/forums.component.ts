@@ -38,7 +38,8 @@ export class ForumsComponent implements OnInit {
   }
 
   agregarPost(nuevoPost: { title: string; content: string }) {
-    this.postService.addPost(nuevoPost).subscribe(
+    const userId = this.obtenerUserId(); // 🔹 Asegúrate de obtener el userId
+    this.postService.addPost({ ...nuevoPost, userId }).subscribe(
       (postConId) => {
         this.posts.unshift(postConId);
       },
@@ -47,15 +48,9 @@ export class ForumsComponent implements OnInit {
       }
     );
   }
-  eliminarPost(id: number) {
-    this.postService.deletePost(id).subscribe(
-      () => {
-        this.posts = this.posts.filter((p) => p.id !== id);
-      },
-      (error) => {
-        console.error('Error al eliminar post:', error);
-      }
-    );
+  obtenerUserId(): number {
+    // Aquí puedes obtener el ID del usuario desde un servicio de autenticación
+    return 1; // 🔹 Temporalmente usa un valor fijo
   }
 
   goToPsot(id: number) {

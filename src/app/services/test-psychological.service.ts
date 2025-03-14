@@ -5,27 +5,31 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
-interface Cuestion {
-  id: number;
-  texto: string;
-  options: string[];
-  selected: string | null;
-}
 
 @Injectable({
   providedIn: 'root',
 })
 export class TestPsychologicalService {
-  private apiUrl = 'http://localhost:4000/psychological-test';
+  private apiUrl = 'http://localhost:4000/psychological-responses/questions';
 
   constructor(private http: HttpClient) {}
 
-  getQuestions(): Observable<any[]> {
+  private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
+    return new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     });
-    return this.http.get<any[]>(this.apiUrl, { headers });
+  }
+
+  getQuestions(): Observable<any[]> {
+    return this.http
+      .get<any[]>(this.apiUrl, { headers: this.getHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('❌ Error en la petición:', error);
+    return throwError(() => new Error('Error al obtener las preguntas'));
   }
 }
