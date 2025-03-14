@@ -30,7 +30,8 @@ import { TableCoursesComponent } from './components/features/moduleOrientacion/e
 import { TableVoluntariationComponent } from './components/features/moduleOrientacion/exploracion/tables/table-voluntariation/table-voluntariation.component';
 
 import { PostDetailsComponent } from './components/component/post-details/post-details.component';
-import { AdminComponent } from './auth/components/admin/admin.component';
+
+import { AdminPruebaComponent } from './auth/components/admin-prueba/admin-prueba.component';
 
 export const routes: Routes = [
   {
@@ -132,12 +133,13 @@ export const routes: Routes = [
         component: PostDetailsComponent,
         canActivate: [AuthGuard],
       },
+      {
+        path: 'admin',
+        component: PruebaComponent,
+      },
     ],
   },
-  {
-    path: 'prueba',
-    component: PruebaComponent,
-  },
+
   {
     path: 'home',
     component: HomeComponent,
@@ -161,10 +163,6 @@ export const routes: Routes = [
   {
     path: '**', // Ruta comodín para manejar rutas no encontradas
     redirectTo: 'home',
-  },
-  {
-    path: 'admin',
-    component: AdminComponent,
   },
 ];
 

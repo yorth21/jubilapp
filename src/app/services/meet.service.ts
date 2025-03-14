@@ -5,6 +5,14 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
+export interface Meet {
+  id: number;
+  userId: number;
+  userNames: string;
+  date: string;
+  doctorName: string;
+  description: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +26,7 @@ export class MeetService {
 
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
+    console.log('Token actual:', token);
     return new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -52,5 +61,11 @@ export class MeetService {
     return this.http
       .delete(`${this.apiUrl}/${meetId}`, { headers })
       .pipe(catchError(this.handleError));
+  }
+  getMeets(): Observable<Meet[]> {
+    const headers = this.getHeaders();
+    return this.http.get<Meet[]>(this.apiUrl, { headers }).pipe(
+      catchError(this.handleError) // Manejo de errores
+    );
   }
 }
