@@ -33,7 +33,7 @@ interface RegisterResponse {
   providedIn: 'root',
 })
 export class AuthService {
-  private BASE_URL = 'http://localhost:4000'; // URL base de la API
+  private BASE_URL = 'http://localhost:4000';
   private TOKEN_KEY = 'token';
   private USER_KEY = 'user';
   private userCedula: string | null = null;
@@ -56,10 +56,7 @@ export class AuthService {
             this.saveToken(response.accessToken);
             this.saveUser(response.user);
             this.authStatus.next(true);
-            if (identification === '1231231231') {
-              this.authStatus.next(true);
-              this.userCedula = identification;
-            }
+            this.userCedula = identification;
           }
         }),
         catchError((error) => {
@@ -70,7 +67,7 @@ export class AuthService {
   }
 
   register(userData: any): Observable<RegisterResponse> {
-    console.log('Enviando datos de registro:', userData); // Depuración
+    console.log('Enviando datos de registro:', userData);
 
     return this.http
       .post<RegisterResponse>(`${this.BASE_URL}/users`, userData)
@@ -135,7 +132,7 @@ export class AuthService {
     return user?.id || null;
   }
   isAdmin(): boolean {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const user = JSON.parse(localStorage.getItem(this.USER_KEY) || '{}');
     return user?.isAdmin === true;
   }
 }

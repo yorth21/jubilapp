@@ -1,0 +1,51 @@
+<div class="admin-container p-6">
+  <header class="mb-6">
+    <h2 class="text-2xl font-semibold text-white">Panel de Administración</h2>
+    <div class="doctor-info flex gap-4 mt-4">
+      <label class="text-lg font-semibold">Seleccionar Médico:</label>
+      <select [(ngModel)]="selectedDoctor" class="border p-2 rounded w-64">
+        <option
+          *ngFor="let doctor of doctorList"
+          [value]="doctor"
+          class="text-black"
+        >
+          {{ doctor }}
+        </option>
+      </select>
+    </div>
+  </header>
+
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse border border-gray-300">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="border p-2">ID Cita</th>
+          <th class="border p-2">ID Usuario</th>
+          <th class="border p-2">Nombre Usuario</th>
+          <th class="border p-2">Fecha</th>
+          <th class="border p-2">Médico</th>
+          <th class="border p-2">Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let meet of getFilteredMeets()"
+          class="odd:bg-white even:bg-gray-50"
+        >
+          <td class="border p-2 text-center">{{ meet.id }}</td>
+          <td class="border p-2 text-center">{{ meet.userId }}</td>
+          <td class="border p-2">{{ meet.userNames }}</td>
+          <td class="border p-2 text-center">
+            {{ meet.date | date : "yyyy-MM-dd" }}
+          </td>
+          <td class="border p-2">{{ meet.doctorName }}</td>
+          <td class="border p-2">{{ meet.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #noAccess>
+  <p>No tienes permisos para ver esta sección.</p>
+</ng-template>

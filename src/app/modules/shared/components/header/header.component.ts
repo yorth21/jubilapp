@@ -1,10 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { IconJubilComponent } from '../../../../components/component/icon-jubil/icon-jubil.component';
+
 import { MiPerfilComponent } from '../../../../components/component/mi-perfil/mi-perfil.component';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { ButtonExitComponent } from '../../../../components/component/button-exit/button-exit.component';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +14,7 @@ import { ButtonExitComponent } from '../../../../components/component/button-exi
 })
 export class HeaderComponent {
   isaAuthenticated: boolean = false;
+  isAdmin: boolean = false;
   @Input() exitRoute: string = '';
   @Input() titulo: String = '';
 

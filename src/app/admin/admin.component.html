@@ -1,7 +1,23 @@
-<div *ngIf="isAdmin; else noAccess">
-  <h1>Bienvenido al panel de administración</h1>
-</div>
-
 <ng-template #noAccess>
   <p>No tienes permisos para ver esta sección.</p>
 </ng-template>
+
+<h1 class="text-center">BIENVENIDO</h1>
+
+<div class="flex justify-center gap-4 my-6">
+  <button
+    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+    (click)="goToModule('events_admin')"
+  >
+    Eventos Admin
+  </button>
+
+  <button
+    class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700"
+    (click)="goToModule('meets_admin')"
+  >
+    Reuniones Admin
+  </button>
+</div>
+
+<router-outlet></router-outlet>

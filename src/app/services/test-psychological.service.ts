@@ -10,7 +10,7 @@ import {
   providedIn: 'root',
 })
 export class TestPsychologicalService {
-  private apiUrl = 'http://localhost:4000/psychological-responses'; // Reemplaza con la URL real
+  private apiUrl = 'http://localhost:4000/psychological-responses';
   private psicologiaSubject = new BehaviorSubject<any[]>([]);
   psicologia$ = this.psicologiaSubject.asObservable();
 
@@ -32,7 +32,6 @@ export class TestPsychologicalService {
       .pipe(catchError(this.handleError));
   }
 
-  // Enviar respuestas del test
   submitResponses(
     responses: { questionId: number; scaleId: number }[]
   ): Observable<any> {
@@ -42,7 +41,6 @@ export class TestPsychologicalService {
       .pipe(catchError(this.handleError));
   }
 
-  // Obtener resultados de un test por identificación
   getTestResults(identification: string): Observable<any> {
     const headers = this.getHeaders();
     return this.http
@@ -50,7 +48,6 @@ export class TestPsychologicalService {
       .pipe(catchError(this.handleError));
   }
 
-  // Obtener escalas de respuestas (Likert)
   getLikertScales(): Observable<any> {
     const headers = this.getHeaders();
     return this.http

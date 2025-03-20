@@ -28,11 +28,13 @@ import { TableVoluntariationComponent } from './components/features/moduleOrient
 import { PostDetailsComponent } from './components/component/post-details/post-details.component';
 import { UnauthorizedComponent } from './components/component/unauthorized/unauthorized.component';
 import { adminGuard } from './guards/admin.guard';
+import { EventosAdministrationComponent } from './admin/components/eventos-administration/eventos-administration.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -168,6 +170,7 @@ export const routes: Routes = [
       import('./admin/admin.module').then((m) => m.AdminModule),
     canActivate: [AuthGuard, adminGuard],
   },
+
   {
     path: '**', // Ruta comodín para manejar rutas no encontradas
     redirectTo: 'home',

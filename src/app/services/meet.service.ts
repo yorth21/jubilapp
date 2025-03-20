@@ -64,8 +64,8 @@ export class MeetService {
   }
   getMeets(): Observable<Meet[]> {
     const headers = this.getHeaders();
-    return this.http.get<Meet[]>(this.apiUrl, { headers }).pipe(
-      catchError(this.handleError) // Manejo de errores
-    );
+    return this.http
+      .get<Meet[]>(this.apiUrl, { headers })
+      .pipe(catchError(this.handleError));
   }
 }

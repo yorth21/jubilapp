@@ -8,6 +8,19 @@
         <label for="job">Profesion</label>
         <h2 id="job">{{ user.job || "No especificado" }}</h2>
       </div>
+
+      <div class="flex gap-2 text-[var(--text2-color)] flex-col text-center">
+        <h2 id="admin">
+          <a
+            *ngIf="isAdmin"
+            [routerLink]="['/admin']"
+            class="text-blue-500 hover:underline cursor-pointer"
+            >Panel de Administración</a
+          >
+          <span *ngIf="!isAdmin" class="text-gray-500">No autorizado</span>
+        </h2>
+      </div>
+
       <div class="flex gap-2 text-[var(--text2-color)] flex-col text-center">
         <label for="birthDate">Fecha nacimiento</label>
         <h2 id="birthDate">{{ user.identification || "No especificado" }}</h2>

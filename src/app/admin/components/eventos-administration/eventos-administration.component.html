@@ -1,0 +1,128 @@
+<div class="flex flex-col md:flex-row gap-6 m-6 md:m-20">
+  <form
+    (submit)="submitEvent()"
+    class="w-full md:w-1/3 mx-auto bg-white p-6 rounded-lg shadow-lg space-y-4"
+  >
+    <h2 class="text-2xl font-bold text-center text-gray-800">Crear Evento</h2>
+
+    <div class="flex flex-col">
+      <label class="text-gray-700 font-semibold">Tipo de evento:</label>
+      <select
+        [(ngModel)]="event.type"
+        name="type"
+        class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <option [ngValue]="'concert'">Concierto</option>
+        <option [ngValue]="'job'">Trabajo</option>
+      </select>
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-gray-700 font-semibold">Título:</label>
+      <input
+        [(ngModel)]="event.title"
+        name="title"
+        required
+        class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Título del evento"
+      />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-gray-700 font-semibold">Descripción:</label>
+      <textarea
+        [(ngModel)]="event.description"
+        name="description"
+        class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Escribe una descripción..."
+      ></textarea>
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-gray-700 font-semibold">Enlace:</label>
+      <input
+        [(ngModel)]="event.link"
+        name="link"
+        type="url"
+        class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="URL del evento"
+      />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-gray-700 font-semibold">Fecha de inicio:</label>
+      <input
+        [(ngModel)]="event.startDate"
+        name="startDate"
+        type="datetime-local"
+        class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-gray-700 font-semibold">Imagen (URL):</label>
+      <input
+        [(ngModel)]="event.image"
+        name="image"
+        type="url"
+        class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="https://ejemplo.com/imagen.jpg"
+      />
+
+      <img
+        *ngIf="event.image"
+        [src]="event.image"
+        alt="Vista previa"
+        class="mt-2 rounded-md shadow-md max-h-40 mx-auto"
+      />
+    </div>
+
+    <div class="flex flex-col">
+      <label class="text-gray-700 font-semibold">Ubicación:</label>
+      <input
+        [(ngModel)]="event.location"
+        name="location"
+        class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Ubicación del evento"
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-md transition-all"
+    >
+      Crear Evento
+    </button>
+  </form>
+
+  <!-- Tabla -->
+  <div class="w-full md:w-2/3 bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">
+      Lista de Eventos
+    </h2>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse border border-gray-300">
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="border border-gray-300 px-4 py-2">Evento</th>
+            <th class="border border-gray-300 px-4 py-2">Descripción</th>
+            <th class="border border-gray-300 px-4 py-2">Fecha</th>
+            <th class="border border-gray-300 px-4 py-2">Tipo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let event of allEvents">
+            <td class="border border-gray-300 px-4 py-2">{{ event.title }}</td>
+            <td class="border border-gray-300 px-4 py-2">
+              {{ event.description }}
+            </td>
+            <td class="border border-gray-300 px-4 py-2">
+              {{ event.startDate | date : "yyyy-MM-dd HH:mm" }}
+            </td>
+            <td class="border border-gray-300 px-4 py-2">{{ event.type }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
