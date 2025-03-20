@@ -16,6 +16,7 @@ import {
   styleUrl: './form-register.component.css',
 })
 export class FormRegisterComponent {
+  showPassword: boolean = false;
   @Output() datosRegistro = new EventEmitter<any>();
   registerForm: FormGroup;
 
@@ -46,7 +47,11 @@ export class FormRegisterComponent {
       console.log('Formulario enviado:', this.registerForm.value);
       this.datosRegistro.emit(this.registerForm.value);
     } else {
-      console.log('Formulario inválido');
+      console.log('error');
     }
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

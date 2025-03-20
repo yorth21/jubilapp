@@ -9,14 +9,6 @@
         placeholder="Nombre"
         class="input-field text-[var(--text-color)] border rounded-md p-2"
       />
-      <div class="error-container">
-        <div
-          *ngIf="f['names'].invalid && f['names'].touched"
-          class="error-message"
-        >
-          Apellidos son obligatorios.
-        </div>
-      </div>
     </label>
 
     <label class="flex text-center flex-col items-center">
@@ -28,14 +20,6 @@
         placeholder="Apellidos"
         class="input-field text-[var(--text-color)] border rounded-md p-2"
       />
-      <div class="error-container">
-        <div
-          *ngIf="f['lastNames'].invalid && f['lastNames'].touched"
-          class="error-message"
-        >
-          Ingrese un Apellido válido.
-        </div>
-      </div>
     </label>
 
     <label class="flex text-center flex-col items-center">
@@ -43,18 +27,16 @@
       <input
         type="text"
         maxlength="10"
+        minlength="7"
         formControlName="identification"
         placeholder="No Documento"
         class="input-field text-[var(--text-color)] border rounded-md p-2"
+        [ngClass]="{
+          'border-red-500':
+            f['identification'].invalid && f['identification'].touched,
+          'border-green-500': f['identification'].valid
+        }"
       />
-      <div class="error-container">
-        <div
-          *ngIf="f['identification'].invalid && f['identification'].touched"
-          class="error-message"
-        >
-          Ingrese una identification válida.
-        </div>
-      </div>
     </label>
 
     <label class="flex text-center flex-col items-center">
@@ -66,14 +48,16 @@
         formControlName="email"
         placeholder="email@gmail.com"
         class="input-field text-[var(--text-color)] border rounded-md p-2"
+        [ngClass]="{
+          'border-red-500': f['email'].invalid && f['email'].touched,
+          'border-green-500': f['email'].valid
+        }"
       />
       <div class="error-container">
         <div
           *ngIf="f['email'].invalid && f['email'].touched"
           class="error-message"
-        >
-          Ingrese un email válido.
-        </div>
+        ></div>
       </div>
     </label>
 
@@ -96,25 +80,55 @@
         placeholder="Ingrese su Teléfono"
         class="input-field text-[var(--text-color)] border rounded-md p-2"
       />
-      <div class="error-container">
-        <div
-          *ngIf="f['phone'].invalid && f['phone'].touched"
-          class="error-message"
-        >
-          10 dígitos numéricos.
-        </div>
-      </div>
     </label>
 
-    <label class="flex text-center flex-col items-center">
+    <label class="flex text-center flex-col items-center relative">
       <span class="text-[var(--text-color)] font-semibold">Contraseña</span>
-      <input
-        minlength="6"
-        type="password"
-        formControlName="password"
-        placeholder="Ingrese su Contraseña"
-        class="input-field text-[var(--text-color)] border rounded-md p-2"
-      />
+      <div class="relative w-full">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          minlength="6"
+          formControlName="password"
+          placeholder="Ingrese su Contraseña"
+          class="input-field text-[var(--text-color)] border rounded-md p-2 w-full pr-10"
+        />
+        <button
+          type="button"
+          class="absolute inset-y-0 right-2 flex items-center"
+          (click)="togglePasswordVisibility()"
+        >
+          <svg
+            *ngIf="!showPassword"
+            class="w-5 h-5 text-gray-500"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.25 9.75L21 3m0 0L15.25 3m5.75 0v6.5"
+            ></path>
+          </svg>
+          <svg
+            *ngIf="showPassword"
+            class="w-5 h-5 text-gray-500"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 3l18 18m-2.5-2.5a9 9 0 01-13-13M3 3l2.5 2.5m0 0a9 9 0 0113 13M3 3l18 18"
+            ></path>
+          </svg>
+        </button>
+      </div>
       <div class="error-container">
         <div
           *ngIf="f['password'].invalid && f['password'].touched"
@@ -138,12 +152,24 @@
 
     <label class="flex text-center flex-col items-center">
       <span class="text-[var(--text-color)] font-semibold">Sexo</span>
-      <input
-        type="text"
+      <select
         formControlName="gender"
-        placeholder="M / F"
         class="input-field text-[var(--text-color)] border rounded-md p-2"
-      />
+        [ngClass]="{
+          'border-red-500': f['gender'].invalid && f['gender'].touched,
+          'border-green-500': f['gender'].valid
+        }"
+      >
+        <option value="" disabled selected>Seleccione...</option>
+        <option value="M">Masculino</option>
+        <option value="F">Femenino</option>
+      </select>
+      <div class="error-container">
+        <div
+          *ngIf="f['gender'].invalid && f['gender'].touched"
+          class="error-message text-red-500"
+        ></div>
+      </div>
     </label>
 
     <label class="flex text-center flex-col items-center">

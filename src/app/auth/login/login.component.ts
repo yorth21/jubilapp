@@ -43,15 +43,6 @@ export class LoginComponent {
   }
 
   login() {
-    if (this.loginForm.invalid) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Advertencia',
-        text: 'Por favor, complete el formulario',
-        backdrop: `rgba(0,0,123,0.4)`,
-      });
-      return;
-    }
     const { identification, password } = this.loginForm.value;
     this.authService.login(identification, password).subscribe({
       next: () => {

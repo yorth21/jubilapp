@@ -27,14 +27,17 @@ export class RegisterComponent {
   recibirDatosRegistro(datos: any) {
     this.authService.register(datos).subscribe({
       next: (response) => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Registro exitoso',
-          text: 'Redirigiendo...',
-          timer: 2000,
-          showConfirmButton: false,
+        setTimeout(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Registro exitoso',
+            text: 'Redirigiendo...',
+            timer: 2000,
+            showConfirmButton: false,
+          }).then(() => {
+            this.router.navigate(['/login']);
+          });
         });
-        this.router.navigate(['/login']);
       },
       error: (error) => {
         Swal.fire({

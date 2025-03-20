@@ -80,7 +80,7 @@ export class ChatService {
       )
       .pipe(
         tap((newComment) => {
-          const currentComments = this.commentsSubject.value;
+          const currentComments = this.commentsSubject.value || [];
           this.commentsSubject.next([...currentComments, newComment]);
         })
       );

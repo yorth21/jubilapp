@@ -79,6 +79,10 @@ export class PostDetailsComponent implements OnInit {
   }
 
   getComments() {
+    if (!this.post) {
+      setTimeout(() => this.getComments(), 100);
+      return;
+    }
     this.postService.getCommentsAll().subscribe(
       (data: Comment[]) => {
         if (!this.post) return;
@@ -97,6 +101,7 @@ export class PostDetailsComponent implements OnInit {
       (comment) => {
         this.comments.push(comment);
         this.newComment = '';
+        this.getComments();
       },
       (error) => console.error('Error al agregar comentario:', error)
     );

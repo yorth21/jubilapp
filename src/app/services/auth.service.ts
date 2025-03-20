@@ -70,13 +70,17 @@ export class AuthService {
   }
 
   register(userData: any): Observable<RegisterResponse> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    console.log('Enviando datos de registro:', userData); // Depuración
+
     return this.http
-      .post<RegisterResponse>(`${this.BASE_URL}/users`, userData, { headers })
+      .post<RegisterResponse>(`${this.BASE_URL}/users`, userData)
       .pipe(
+        tap((response) => console.log('Registro exitoso:', response)),
         catchError((error) => {
           console.error('Error en el registro:', error);
-          return throwError(() => new Error('Error en el registro'));
+          return throwError(
+            () => new Error(error.error?.message || 'Error en el registro')
+          );
         })
       );
   }
