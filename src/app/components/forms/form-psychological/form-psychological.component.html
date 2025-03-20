@@ -1,45 +1,24 @@
-<div class="bg-[var(--primary-color)] p-6 rounded-lg shadow-md">
-  <h2
-    class="text-center text-2xl font-bold mb-4 font-serif text-[var(--text-color)]"
-  >
-    Cuestionario
-  </h2>
+<div *ngIf="questions.length === 0">Cargando preguntas...</div>
 
-  <form [formGroup]="form" (ngSubmit)="sendAnswers()">
-    <div
-      *ngFor="let question of questions"
-      class="mb-4 p-4 bg-[var(--primary-color)] rounded-lg shadow"
-    >
-      <h3
-        class="text-xl font-semibold mb-2 font-serif text-[var(--text-color)]"
-      >
-        {{ question.question }}
-      </h3>
-      <div class="flex flex-col">
-        <label
-          *ngFor="let answer of question.answers"
-          class="flex items-center cursor-pointer font-serif text-xl text-[var(--text-color)]"
-        >
-          <input
-            type="radio"
-            [name]="'pregunta_' + question.id"
-            [value]="answer.answer"
-            (change)="selectAnswer(question.id, answer.answer)"
-            [checked]="
-              form.controls[question.id.toString()].value === answer.answer
-            "
-            class="mr-2 text-[var(--text-color)]"
-          />
-          {{ answer.answer }}
-        </label>
-      </div>
-    </div>
+<div *ngFor="let question of questions">
+  <p>{{ question.position }}. {{ question.question }}</p>
 
-    <button
-      type="submit"
-      class="w-full bg-[var(--background-color)] text-[var(--primary-color)] font-serif font-bold py-2 rounded-lg hover:bg-[var(--text-color)] hover:text-[var(--primary-color)]"
-    >
-      Enviar Respuestas
-    </button>
-  </form>
+  <div *ngFor="let scale of likertScales">
+    <label>
+      <input
+        type="radio"
+        name="q{{ question.questionId }}"
+        [value]="scale.id"
+        (change)="selectAnswer(question.questionId, scale.id)"
+      />
+      {{ scale.name }}
+    </label>
+  </div>
 </div>
+
+<button
+  (click)="submitTest()"
+  class="bg-blue-500 text-white px-4 py-2 mt-4 rounded"
+>
+  Enviar respuestas
+</button>

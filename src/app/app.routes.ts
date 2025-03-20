@@ -3,17 +3,14 @@ import { HomeComponent } from './components/features/home/home.component';
 import { WelcomeComponent } from './components/features/welcome/welcome.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-
 import { ModulosComponent } from './components/features/modulos/modulos.component';
 import { PerfilComponent } from './components/features/perfil/perfil.component';
 import { NgModule } from '@angular/core';
 import { TestVocationalComponent } from './components/features/moduleOrientacion/test-vocational/test-vocational.component';
 import { RecommendedActivitiesComponent } from './components/features/moduleOrientacion/recommended-activities/recommended-activities.component';
-
 import { ForumsComponent } from './components/features/iteractionModule/forums/forums.component';
 import { ModuleIteractionsComponent } from './components/features/iteractionModule/module-iteractions/module-iteractions.component';
 import { LiveActiviesComponent } from './components/features/iteractionModule/live-activies/live-activies.component';
-
 import { PsicologyComponent } from './components/features/psicology/psicology.component';
 import { ReportsTestComponent } from './components/features/testModule/reports-test/reports-test.component';
 import { TestPersonalComponent } from './components/features/testModule/test-personal/test-personal.component';
@@ -28,9 +25,9 @@ import { TableEventsComponent } from './components/component/table-events/table-
 import { TableActivitiesComponent } from './components/features/moduleOrientacion/exploracion/tables/table-activities/table-activities.component';
 import { TableCoursesComponent } from './components/features/moduleOrientacion/exploracion/tables/table-courses/table-courses.component';
 import { TableVoluntariationComponent } from './components/features/moduleOrientacion/exploracion/tables/table-voluntariation/table-voluntariation.component';
-
 import { PostDetailsComponent } from './components/component/post-details/post-details.component';
 import { UnauthorizedComponent } from './components/component/unauthorized/unauthorized.component';
+import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -132,13 +129,14 @@ export const routes: Routes = [
         component: PostDetailsComponent,
         canActivate: [AuthGuard],
       },
-      {
-        path: 'admin',
-        component: PruebaComponent,
-        canActivate: [AuthGuard],
-      },
     ],
   },
+  // {
+  //   path: 'admin',
+  //   loadChildren: () =>
+  //     import('./admin/admin-routing.module').then((m) => m.AdminRoutingModule),
+  //   canActivate: [AuthGuard, adminGuard],
+  // },
   {
     path: 'unauthorized',
     component: UnauthorizedComponent,
@@ -163,6 +161,12 @@ export const routes: Routes = [
   {
     path: 'card',
     component: ModuloOnlyComponent,
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+    canActivate: [AuthGuard, adminGuard],
   },
   {
     path: '**', // Ruta comodín para manejar rutas no encontradas

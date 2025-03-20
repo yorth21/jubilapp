@@ -1,0 +1,7 @@
+<div *ngIf="isAdmin; else noAccess">
+  <h1>Bienvenido al panel de administración</h1>
+</div>
+
+<ng-template #noAccess>
+  <p>No tienes permisos para ver esta sección.</p>
+</ng-template>

@@ -11,38 +11,52 @@ import { CommonModule } from '@angular/common';
   styleUrl: './form-psychological.component.css',
 })
 export class FormPsychologicalComponent implements OnInit {
-  form: FormGroup;
-  questions: any[] = [];
+  questions: any[] = []; // Guarda las preguntas del test
+  likertScales: any[] = []; // Guarda las opciones de respuestas
+  responses: any[] = []; // Guarda las respuestas del usuario
 
-  constructor(
-    private fb: FormBuilder,
-    private questionaryService: TestPsychologicalService
-  ) {
-    this.form = this.fb.group({});
-  }
+  constructor(private psychologicalService: TestPsychologicalService) {}
 
   ngOnInit() {
-    this.questionaryService.getQuestions().subscribe(
-      (questions) => {
-        console.log('preguntas recibidas', questions);
-        this.questions = questions;
+    this.loadQuestions();
+    this.loadLikertScales();
+  }
 
-        questions.forEach((question) => {
-          this.form.addControl(question.id.toString(), this.fb.control(null));
-        });
-        console.log('controles', this.form.controls);
+  loadQuestions() {
+    this.psychologicalService.getQuestions().subscribe(
+      (data) => {
+        console.log('Preguntas recibidas:', data);
+        this.questions = data;
       },
-      (error) => {
-        console.error('❌ Error al obtener preguntas:', error);
-      }
+      (error) => console.error('Error al obtener preguntas:', error)
     );
   }
-
-  sendAnswers() {
-    console.log(this.form.value);
+  // Cargar escalas de respuestas (Likert)
+  loadLikertScales() {
+    this.psychologicalService.getLikertScales().subscribe((data) => {
+      console.log('Escalas Likert recibidas:', data);
+      this.likertScales = data;
+    });
   }
 
-  selectAnswer(questionId: number, selected: string) {
-    this.form.controls[questionId.toString()].setValue(selected);
+  // Guardar la respuesta del usuario
+  selectAnswer(questionId: number, scaleId: number) {
+    const existingResponse = this.responses.find(
+      (r) => r.questionId === questionId
+    );
+    if (existingResponse) {
+      existingResponse.scaleId = scaleId; // Actualizar respuesta
+    } else {
+      this.responses.push({ questionId, scaleId }); // Agregar nueva respuesta
+    }
+  }
+
+  // Enviar respuestas a la API
+  submitTest() {
+    this.psychologicalService
+      .submitResponses(this.responses)
+      .subscribe((response) => {
+        console.log('Test enviado correctamente:', response);
+      });
   }
 }

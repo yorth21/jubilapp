@@ -52,12 +52,20 @@ export class PostDetailsComponent implements OnInit {
       const id = +params['id'];
       if (id) {
         this.getPostDetail(id);
-        this.getComments(id);
+        this.getComments();
+      }
+    });
+    this.postService.comments$.subscribe((comments) => {
+      if (this.post) {
+        this.comments = comments.filter(
+          (comment) => comment.postId === this.post!.id
+        );
       }
     });
   }
 
   getPostDetail(id: number) {
+    console.log('ingresaste a postdetail', id);
     this.postService.getPost(id).subscribe(
       (data) => {
         if (!data.userId) {
@@ -70,14 +78,19 @@ export class PostDetailsComponent implements OnInit {
     );
   }
 
-  getComments(id: number) {
-    this.postService.getCommentsByPostId(id).subscribe(
+  getComments() {
+    this.postService.getCommentsAll().subscribe(
       (data: Comment[]) => {
-        this.comments = data;
+        if (!this.post) return;
+
+        this.comments = data.filter(
+          (comment) => comment.postId === this.post!.id
+        );
       },
       (error) => console.error('Error al obtener los comentarios:', error)
     );
   }
+
   addComments() {
     if (!this.newComment.trim() || !this.post) return;
     this.postService.addComment(this.post.id, this.newComment).subscribe(
@@ -104,20 +117,14 @@ export class PostDetailsComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.postService.deleteComment(commentId).subscribe(
-          () => {
-            this.comments = this.comments.filter(
-              (comment) => comment.id !== commentId
-            );
+          () =>
             Swal.fire(
               'Eliminado',
               'El comentario ha sido eliminado.',
               'success'
-            );
-          },
-          (error) => {
-            console.error('Error al eliminar comentario:', error);
-            Swal.fire('Error', 'No se pudo eliminar el comentario.', 'error');
-          }
+            ),
+          () =>
+            Swal.fire('Error', 'No se pudo eliminar el comentario.', 'error')
         );
       }
     });

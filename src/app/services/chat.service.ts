@@ -20,9 +20,11 @@ interface Comment {
   providedIn: 'root',
 })
 export class ChatService {
+  comments: any[] = [];
   private apiUrl = 'http://localhost:4000/posts';
 
   private commentsSubject = new BehaviorSubject<Comment[]>([]);
+  public comments$ = this.commentsSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -32,6 +34,16 @@ export class ChatService {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     });
+  }
+  getCommentsAll(): Observable<Comment[]> {
+    const httpOptions = { headers: this.getHeaders() };
+    return this.http
+      .get<Comment[]>('http://localhost:4000/comments', httpOptions)
+      .pipe(
+        tap((comments) => {
+          this.commentsSubject.next(comments); // Actualiza el BehaviorSubject con los comentarios recibidos
+        })
+      );
   }
 
   getPosts(): Observable<Post[]> {
@@ -55,13 +67,7 @@ export class ChatService {
       headers: this.getHeaders(),
     });
   }
-  getCommentsByPostId(postId: number): Observable<Comment[]> {
-    return this.http
-      .get<Comment[]>(`http://localhost:4000/comments/post/${postId}`, {
-        headers: this.getHeaders(),
-      })
-      .pipe(tap((comments) => this.commentsSubject.next(comments)));
-  }
+
   addComment(postId: number, content: string): Observable<Comment> {
     return this.http
       .post<Comment>(
@@ -79,11 +85,18 @@ export class ChatService {
         })
       );
   }
-  deleteComment(commentId: number): Observable<any> {
-    const httpOptions = { headers: this.getHeaders() };
-    return this.http.delete(
-      `http://localhost:4000/comments/${commentId}`,
-      httpOptions
-    );
+  deleteComment(commentId: number): Observable<void> {
+    return this.http
+      .delete<void>(`http://localhost:4000/comments/${commentId}`, {
+        headers: this.getHeaders(),
+      })
+      .pipe(
+        tap(() => {
+          const updatedComments = this.commentsSubject.value.filter(
+            (comment) => comment.id !== commentId
+          );
+          this.commentsSubject.next(updatedComments);
+        })
+      );
   }
 }

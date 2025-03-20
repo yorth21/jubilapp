@@ -44,7 +44,6 @@ export class AuthService {
     this.loadUserFromStorage();
   }
 
-  // 🔹 LOGIN
   login(identification: string, password: string): Observable<LoginResponse> {
     return this.http
       .post<LoginResponse>(`${this.BASE_URL}/auth/login`, {
@@ -56,7 +55,7 @@ export class AuthService {
           if (response.accessToken) {
             this.saveToken(response.accessToken);
             this.saveUser(response.user);
-            this.authStatus.next(true); // 🔥 Notifica que el usuario está autenticado
+            this.authStatus.next(true);
             if (identification === '1231231231') {
               this.authStatus.next(true);
               this.userCedula = identification;
@@ -70,7 +69,6 @@ export class AuthService {
       );
   }
 
-  // 🔹 REGISTRO
   register(userData: any): Observable<RegisterResponse> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http
@@ -83,31 +81,26 @@ export class AuthService {
       );
   }
 
-  // 🔹 GUARDAR DATOS DEL USUARIO
   private saveUser(user: any) {
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
     this.userData.next(user);
   }
 
-  // 🔹 GUARDAR TOKEN
   private saveToken(token: string) {
     localStorage.setItem(this.TOKEN_KEY, token);
   }
 
-  // 🔹 CERRAR SESIÓN
   logout() {
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USER_KEY);
     this.userData.next(null);
-    this.authStatus.next(false); // 🔥 Notifica que el usuario cerró sesión
+    this.authStatus.next(false);
   }
 
-  // 🔹 OBTENER TOKEN
   getToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY);
   }
 
-  // 🔹 COMPROBAR AUTENTICACIÓN (REACTIVO)
   isAuthenticated(): Observable<boolean> {
     return this.authStatus.asObservable();
   }
@@ -118,22 +111,15 @@ export class AuthService {
   getUser() {
     return JSON.parse(localStorage.getItem('user') || 'null');
   }
-  isAdmin(): boolean {
-    const user = this.getUser();
-    return user.cedula === '1231231231';
-  }
 
-  // 🔹 VERIFICAR SI EXISTE UN TOKEN (MÉTODO PRIVADO)
   private hasToken(): boolean {
     return !!localStorage.getItem(this.TOKEN_KEY);
   }
 
-  // 🔹 OBTENER DATOS DEL USUARIO
   getUserData(): Observable<any> {
     return this.userData.asObservable();
   }
 
-  // 🔹 CARGAR USUARIO DESDE `localStorage`
   private loadUserFromStorage() {
     const user = localStorage.getItem(this.USER_KEY);
     if (user) {
@@ -143,5 +129,9 @@ export class AuthService {
   getUserId(): number | null {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     return user?.id || null;
+  }
+  isAdmin(): boolean {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user?.isAdmin === true;
   }
 }
