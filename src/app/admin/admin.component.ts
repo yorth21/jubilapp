@@ -23,4 +23,7 @@ export class AdminComponent implements OnInit {
   goToModule(route: string) {
     this.router.navigate(['/admin', route]);
   }
+  goToModules(route: string) {
+    this.router.navigate([route]);
+  }
 }
