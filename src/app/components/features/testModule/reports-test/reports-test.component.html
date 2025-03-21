@@ -1,7 +1,8 @@
 <app-button-exit routerPath="/evaluaciones"></app-button-exit>
+
 <div
   *ngIf="results"
-  class="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-2"
+  class="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-4"
 >
   <h2 class="text-center text-2xl font-bold text-gray-800 mb-6">
     📊 Resultados del Test Vocacional
@@ -29,7 +30,12 @@
         </div>
         <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
           <div
-            class="h-full bg-green-500 rounded-full"
+            class="h-full rounded-full transition-all duration-500 ease-in-out"
+            [ngClass]="{
+              'bg-red-500': score.score < 4,
+              'bg-yellow-500': score.score >= 4 && score.score < 7,
+              'bg-green-500': score.score >= 7
+            }"
             [style.width]="score.score * 10 + '%'"
           ></div>
         </div>
@@ -40,4 +46,61 @@
 
 <p *ngIf="!results" class="text-center text-gray-500 mt-6">
   No hay resultados disponibles.
+</p>
+
+<div
+  *ngIf="psychResults"
+  class="max-w-3xl mx-auto p-6 bg-blue-100 shadow-lg rounded-lg mt-8"
+>
+  <h2 class="text-center text-2xl font-bold text-gray-800 mb-6">
+    🧠 Resultados del Test Psicológico
+  </h2>
+
+  <div class="bg-blue-600 text-white p-4 rounded-lg text-center shadow-md">
+    <h3 class="text-xl font-semibold">{{ psychResults?.createdAt }}</h3>
+    <p class="text-lg font-bold">
+      Total: {{ psychResults?.totalScore }}/{{ psychResults?.maxTotalScore }}
+    </p>
+    <p class="text-sm font-light">
+      Interpretación: {{ psychResults?.overallInterpretation }}
+    </p>
+  </div>
+
+  <div class="mt-6">
+    <h3 class="text-lg font-semibold text-gray-700">
+      📈 Puntuaciones por Dimensión
+    </h3>
+    <ul class="mt-4 space-y-4">
+      <li *ngFor="let dimension of psychResults.dimensionScores">
+        <div class="flex justify-between">
+          <span class="font-medium text-gray-800">{{ dimension.name }}</span>
+          <span class="text-gray-600"
+            >{{ dimension.score }}/{{ dimension.maxScore }}</span
+          >
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
+          <div
+            class="h-full rounded-full transition-all duration-500 ease-in-out"
+            [ngClass]="{
+              'bg-red-500': dimension.percentage < 40,
+              'bg-yellow-500':
+                dimension.percentage >= 40 && dimension.percentage < 70,
+              'bg-green-500': dimension.percentage >= 70
+            }"
+            [style.width]="dimension.percentage + '%'"
+          ></div>
+        </div>
+        <p class="text-gray-700 text-sm mt-1 italic">
+          {{ dimension.description }}
+        </p>
+        <p class="text-gray-700 text-sm mt-1 font-semibold">
+          {{ dimension.interpretation }}
+        </p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<p *ngIf="!psychResults" class="text-center text-gray-500 mt-6">
+  No hay resultados psicológicos disponibles.
 </p>

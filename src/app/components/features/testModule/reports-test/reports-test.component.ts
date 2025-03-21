@@ -3,6 +3,7 @@ import { QuestionaryService } from '../../../../services/questionary.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../services/auth.service';
 import { ButtonExitComponent } from '../../../component/button-exit/button-exit.component';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-reports-test',
@@ -14,10 +15,12 @@ import { ButtonExitComponent } from '../../../component/button-exit/button-exit.
 export class ReportsTestComponent {
   user: any = {};
   results: any = null;
+  psychResults: any = null;
 
   constructor(
     private vocationalService: QuestionaryService,
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -25,10 +28,10 @@ export class ReportsTestComponent {
       if (userData) {
         this.user = userData;
 
-        // 📌 Si la identificación está disponible, hacer la llamada a la API
         if (this.user.identification) {
           this.getVocationalResponses(this.user.identification);
         }
+        this.getPsychologicalResponses();
       }
     });
   }
@@ -43,5 +46,26 @@ export class ReportsTestComponent {
         console.error('❌ Error obteniendo los datos vocacionales:', error);
       }
     );
+  }
+  getPsychologicalResponses() {
+    const token = this.authService.getToken();
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    this.http
+      .get('http://localhost:4000/psychological-responses/my-results', {
+        headers,
+      })
+      .subscribe(
+        (response) => {
+          this.psychResults = response;
+          console.log('✅ Datos psicológicos:', this.psychResults);
+        },
+        (error) => {
+          console.error('❌ Error obteniendo los datos psicológicos:', error);
+        }
+      );
   }
 }
