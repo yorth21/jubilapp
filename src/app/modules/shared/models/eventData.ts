@@ -1,5 +1,5 @@
 export interface EventData {
-  type: 'concert' | 'job';
+  type: 'concert' | 'event' | 'activity' | 'curse' | 'voluntarie';
   title: string;
   description: string;
   link: string;

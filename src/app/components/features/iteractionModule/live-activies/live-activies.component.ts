@@ -15,7 +15,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LiveActiviesComponent implements OnInit {
   cards: any[] = [];
-  private apiUrl = 'http://localhost:4000/events/type/concert';
+  private apiUrl = 'http://localhost:4000/events/type/activity';
 
   constructor(private http: HttpClient, private router: Router) {}
 

@@ -10,50 +10,13 @@
       </p>
     </div>
   </div>
-
-  <table
-    class="min-w-full bg-white border border-gray-200 shadow-md rounded-lg"
-  >
-    <thead>
-      <tr class="bg-gray-100">
-        <th class="py-2 px-4 border">ID</th>
-        <th class="py-2 px-4 border">Nombre</th>
-        <th class="py-2 px-4 border">Descripción</th>
-        <th class="py-2 px-4 border">Fecha</th>
-        <th class="py-2 px-4 border">Participantes Activos</th>
-        <th class="py-2 px-4 border">Lugar</th>
-        <th class="py-2 px-4 border">Estado</th>
-        <th class="py-2 px-4 border">Inscribirse</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let evento of eventos" class="text-center">
-        <td class="py-2 px-4 border">{{ evento.id }}</td>
-        <td class="py-2 px-4 border">{{ evento.nombre }}</td>
-        <td class="py-2 px-4 border">{{ evento.descripcion }}</td>
-        <td class="py-2 px-4 border">{{ evento.fecha }}</td>
-        <td class="py-2 px-4 border">{{ evento.participantes }}</td>
-        <td class="py-2 px-4 border">{{ evento.lugar }}</td>
-        <td class="py-2 px-4 border">
-          <span
-            [ngClass]="{
-              'text-green-600': evento.estado === 'Disponible',
-              'text-red-600': evento.estado === 'Cupos Llenos'
-            }"
-          >
-            {{ evento.estado }}
-          </span>
-        </td>
-        <td class="py-2 px-4 border">
-          <button
-            class="bg-blue-500 text-white px-4 py-1 rounded-lg hover:bg-blue-700 disabled:bg-gray-400"
-            [disabled]="evento.estado === 'Cupos Llenos'"
-            (click)="irAInscripcion(evento.link)"
-          >
-            Ir allá
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+</div>
+<div class="flex justify-center gap-6 flex-wrap">
+  <app-modulo-only
+    *ngFor="let card of cards"
+    [title]="card.title"
+    [description]="card.description"
+    [icon]="card.icon"
+    [link]="card.link"
+  ></app-modulo-only>
 </div>

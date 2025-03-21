@@ -32,8 +32,7 @@ export class ModulosComponent {
     },
     {
       title: 'Módulo de Evaluaciones Personalizadas',
-      description:
-        'Evalúa tus habilidades y obtén recomendaciones personalizadas.',
+      description: 'Evalúa tus habilidades y obtén recomendaciones para ti.',
       icon: 'https://images.pexels.com/photos/8654753/pexels-photo-8654753.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       link: '/evaluaciones',
     },
