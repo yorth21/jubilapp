@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { TestPsychologicalService } from '../../../services/test-psychological.service';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-psychological',
@@ -17,7 +19,8 @@ export class FormPsychologicalComponent implements OnInit {
 
   constructor(
     private psychologicalService: TestPsychologicalService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.form = this.fb.group({});
   }
@@ -68,21 +71,53 @@ export class FormPsychologicalComponent implements OnInit {
       .filter((response) => response !== null);
 
     if (responses.length === 0) {
-      console.error('⚠️ No hay respuestas para enviar.');
+      Swal.fire({
+        icon: 'warning',
+        title: '⚠️ Formulario vacío',
+        text: 'No hay respuestas para enviar.',
+      });
       return;
     }
 
     console.log('📩 Datos enviados:', JSON.stringify(responses, null, 2));
 
     this.psychologicalService.submitResponses(responses).subscribe(
-      (response) =>
-        console.log('✅ Respuestas enviadas correctamente:', response),
-      (error) => console.error('❌ Error al enviar respuestas:', error)
+      (response) => {
+        console.log('✅ Respuestas enviadas correctamente:', response);
+
+        Swal.fire({
+          icon: 'success',
+          title: '¡Formulario enviado!',
+          text: 'Tus respuestas se han registrado correctamente.',
+          confirmButtonText: 'Aceptar',
+        }).then(() => {
+          this.router.navigate(['/reportes']);
+        });
+
+        this.form.reset();
+      },
+      (error) => {
+        console.error('❌ Error al enviar respuestas:', error);
+
+        let errorMessage = 'Ocurrió un error. Intenta de nuevo más tarde.';
+        if (error.error && error.error.message) {
+          errorMessage = error.error.message;
+        } else if (error.message) {
+          errorMessage = error.message;
+        }
+
+        Swal.fire({
+          icon: 'error',
+          title: '❌ Error al enviar respuestas',
+          text: errorMessage,
+        });
+      }
     );
   }
   trackByQuestionId(index: number, question: any): number {
     return question.questionId;
   }
+
   trackByScaleId(index: number, scale: any): number {
     return scale.id;
   }

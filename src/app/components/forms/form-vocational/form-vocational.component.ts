@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { QuestionaryService } from '../../../services/questionary.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-vocational',
@@ -17,7 +18,8 @@ export class FormVocationalComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private questionaryService: QuestionaryService
+    private questionaryService: QuestionaryService,
+    private router: Router
   ) {
     this.form = this.fb.group({});
   }
@@ -78,6 +80,9 @@ export class FormVocationalComponent implements OnInit {
             icon: 'success',
             text: '¡Test enviado con éxito!',
             backdrop: `rgba(0,0,123,0.4)`,
+            confirmButtonText: 'Aceptar',
+          }).then(() => {
+            this.router.navigate(['/reportes']);
           });
         },
         (error) => {

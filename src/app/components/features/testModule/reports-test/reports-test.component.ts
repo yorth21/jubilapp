@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { QuestionaryService } from '../../../../services/questionary.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { AuthService } from '../../../../services/auth.service';
 import { ButtonExitComponent } from '../../../component/button-exit/button-exit.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   selector: 'app-reports-test',
   standalone: true,
   imports: [CommonModule, ButtonExitComponent],
+  providers: [DatePipe],
   templateUrl: './reports-test.component.html',
   styleUrl: './reports-test.component.css',
 })
@@ -20,7 +21,8 @@ export class ReportsTestComponent {
   constructor(
     private vocationalService: QuestionaryService,
     private authService: AuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit() {
@@ -49,18 +51,22 @@ export class ReportsTestComponent {
   }
   getPsychologicalResponses() {
     const token = this.authService.getToken();
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
 
     this.http
       .get('http://localhost:4000/psychological-responses/my-results', {
         headers,
       })
       .subscribe(
-        (response) => {
+        (response: any) => {
           this.psychResults = response;
+
+          // Formatear la fecha antes de asignarla
+          this.psychResults.createdAt = this.datePipe.transform(
+            response.createdAt,
+            'dd/MM/yyyy HH:mm'
+          );
+
           console.log('✅ Datos psicológicos:', this.psychResults);
         },
         (error) => {
