@@ -12,9 +12,9 @@
     Cargando preguntas...
   </div>
 
-  <form (ngSubmit)="submitTest()">
+  <form [formGroup]="form" (ngSubmit)="submitTest($event)">
     <div
-      *ngFor="let question of questions"
+      *ngFor="let question of questions; trackBy: trackByQuestionId"
       class="mb-4 p-4 bg-[var(--primary-color)] rounded-lg shadow"
     >
       <h3
@@ -25,14 +25,13 @@
 
       <div class="flex flex-col space-y-2">
         <label
-          *ngFor="let scale of likertScales"
+          *ngFor="let scale of likertScales; trackBy: trackByScaleId"
           class="flex items-center cursor-pointer font-serif text-xl text-[var(--text-color)]"
         >
           <input
             type="radio"
-            [name]="'q' + question.questionId"
+            [formControlName]="'q' + question.questionId"
             [value]="scale.id"
-            (change)="selectAnswer(question.questionId, scale.id)"
             class="mr-2 accent-[var(--background-color)]"
           />
           {{ scale.name }}
